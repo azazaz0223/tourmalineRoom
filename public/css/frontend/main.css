@@ -9,19 +9,12 @@ body::-webkit-scrollbar {
 	width: 5px;
 }
 body::-webkit-scrollbar-track {
-	background-color:#fdfbf5;
+	background-color:#d3cab9;
 } 
 body::-webkit-scrollbar-thumb {
 	border-radius:10px;
-	/*box-shadow: inset 0px 0px 4px 0px rgba(184, 113, 25, .99);*/
-	background: -moz-linear-gradient(top, #fdfbf5 0%, #f7f5ee 30%, #900001 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f5ee), color-stop(100%,#ebbc62)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #fdfbf5 0%, #f7f5ee 30%, #900001 80%, #680102 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #fdfbf5 0%, #f7f5ee 30%, #900001 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #fdfbf5 0%, #f7f5ee 30%, #900001 100%); /* IE10+ */
-	background: linear-gradient(top, #fdfbf5 0%, #f7f5ee 30%, #900001 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f5ee', endColorstr='#efeadc',GradientType=0 ); /* IE6-9 */
-	background-color:#efeadc;
+    background-color: #b4a793;
+    background-color: #b4a793c4;
 }
 body::-webkit-scrollbar-button {
 	background-color:#transparent;
@@ -102,13 +95,15 @@ div[class*="span"] {
 	Typography Style
 --------------------------------------------------------------------------*/
 body {
-  font-family: Arial, 'Helvetica', sans-serif;
+  /*font-family: Arial, 'Helvetica', sans-serif;
   font-family: "微軟正黑體", Arial;
+  font-family: "Signika", 'Noto Sans TC', sans-serif;*/
+  font-family: "Noto Serif TC", serif, sans-serif;
   font-size: 16px;
   line-height: 20px;
   color: #535b60;
   /*background: url(../images/bodybg.jpg);*/
-  background-color: #440001 !important;
+  background-color: #d3cab9 !important;
 }
 h1 {
   color: #53555c;
@@ -1071,7 +1066,7 @@ border:none;
   background: #440001;
   color: #440001;
   /*padding: 0 20px 10px 20px;*/
-  border-top: 5px solid #440001;
+  border-top: 5px solid #928065;
   -webkit-box-shadow: 0 -1px 12px rgba(0,0,0,0.4);
   -moz-box-shadow: 0 -1px 12px rgba(0,0,0,0.4);
   box-shadow: 0 -1px 12px rgba(0,0,0,0.4);

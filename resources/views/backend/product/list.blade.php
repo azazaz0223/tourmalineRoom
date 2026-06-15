@@ -5,25 +5,25 @@
     <nav class="" aria-label="breadcrumb">
         <ol class="breadcrumb d-flex justify-content-start lh-lg m-0 ms-3">
             <li class="breadcrumb-item">前台設定</li>
-            <li class="breadcrumb-item col">美味菜單</li>
+            <li class="breadcrumb-item col">璽室體驗</li>
         </ol>
     </nav>
     <div class="container-fluid p-3 m-1">
 
         <div class="card col-12 rounded-3 bg-white mb-4">
-            <h2 class="fs-5 p-3 fw-bold border-bottom">美味菜單</h2>
+            <h2 class="fs-5 p-3 fw-bold border-bottom">璽室體驗</h2>
 
             <form id="create">
                 <div class="card-body border-bottom">
                     <div class="d-flex justify-content-start gap-3 mb-3">
                         <div class="w-auto">
-                            <div class="dive_sub">菜單標題</div>
+                            <div class="dive_sub">體驗標題</div>
                         </div>
                         <div class="col">
                             <input type="text" name="title" id="title" class="form-control" placeholder="請輸入標題">
                         </div>
                         <div class="w-auto">
-                            <div class="dive_sub">菜單副標</div>
+                            <div class="dive_sub">體驗副標</div>
                         </div>
                         <div class="col-3">
                             <input type="text" name="subtitle" id="subtitle " class="form-control" placeholder="請輸入副標">
@@ -41,7 +41,7 @@
 
                 <div class="card-body border-bottom d-flex justify-content-between gap-3">
                     <div class="col-4 card-body fs-6 gray_l rounded-3">
-                        <label class="mb-2">上傳菜單介紹圖</label>
+                        <label class="mb-2">上傳體驗介紹圖</label>
                         <div class="c-mainCard__item">
                             <div class="l-upload l-upload--notSpace">
                                 <div class="card-body fs-6 gray_l rounded-3">
@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="col-8 card-body fs-6 gray_l rounded-3">
-                        <label class="mb-2">預覽菜單介紹圖</label>
+                        <label class="mb-2">預覽體驗介紹圖</label>
                         <div class="p-0">
                             <img id="productImg" class="mt-3" src="{{ asset('images/backend/defaultImage.png') }}">
                         </div>
@@ -62,7 +62,7 @@
 
                 <div class="card-body border-bottom d-flex justify-content-between gap-3">
                     <div class="col-4 card-body fs-6 gray_l rounded-3">
-                        <label class="mb-2">上傳菜單內容圖</label>
+                        <label class="mb-2">上傳體驗內容圖</label>
                         <div class="c-mainCard__item">
                             <div class="l-upload l-upload--notSpace">
                                 <div class="card-body fs-6 gray_l rounded-3">
@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="col-8 card-body fs-6 gray_l rounded-3">
-                        <label class="mb-2">預覽菜單內容圖</label>
+                        <label class="mb-2">預覽體驗內容圖</label>
                         <div class="p-0">
                             <img id="productContentImg" class="mt-3" src="{{ asset('images/backend/defaultImage.png') }}">
                         </div>
@@ -89,16 +89,16 @@
 
 
         <div class="card col-12 rounded-3 bg-white mb-4">
-            <h2 class="fs-5 p-3 fw-bold border-bottom">美味菜單列表</h2>
+            <h2 class="fs-5 p-3 fw-bold border-bottom">璽室體驗列表</h2>
 
             <div class="card-body toScroll text-nowrap">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th class=""></th>
-                            <th>菜單標題</th>
-                            <th>菜單副標</th>
-                            <th>菜單內文描述</th>
+                            <th>體驗標題</th>
+                            <th>體驗副標</th>
+                            <th>體驗內文描述</th>
                             <th></th>
                         </tr>
                     </thead>

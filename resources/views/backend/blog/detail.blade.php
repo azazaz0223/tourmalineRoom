@@ -3,7 +3,7 @@
 @section('container')
     <div class="card">
         <div class="card-header p-3">
-            <span class="fs-5" id="editorTitle">修改部落格文章</span>
+            <span class="fs-5" id="editorTitle">修改璽室誌文章</span>
         </div>
         <div class="card-body border-bottom">
             <form id="update">

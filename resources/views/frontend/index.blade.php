@@ -5,25 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="google-site-verification" content="SyF3ANdA4MWsMr_aMl2aw40ermtbJCsOBCBSUteBnd0" />
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-M7LSZPVZ');
-    </script>
-    <!-- End Google Tag Manager -->
 
     <title>{{ env('FRONTEND_NAME') }}</title>
 
@@ -42,6 +23,11 @@
 
     <script src="{{ asset('js/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
 
+    {{-- Google Fonts (Noto Sans TC) --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200..900&display=swap" rel="stylesheet">
+
     {{-- owl carousel css --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('owl-carousel/assets/owl.carousel.min.css') }}">
 
@@ -54,45 +40,6 @@
 
     {{-- Responsive Stylesheet multipurpose --}}
     <link rel="stylesheet" href="{{ asset('css/frontend/responsive-multipurpose.css') }}">
-    <style>
-        .sidebar {
-            position: fixed;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-            width: 70px;
-            /* 固定寬度 */
-            background-color: #8B0000;
-            /* 深紅色 */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 0;
-            border-radius: 15px 0 0 15px;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .sidebar a {
-            text-decoration: none;
-            color: white;
-            text-align: center;
-        }
-
-        .sidebar a .icon {
-            font-size: clamp(24px, 2vw, 36px);
-            /* 隨螢幕大小調整 */
-            margin-bottom: 10px;
-        }
-
-        .sidebar a .text {
-            font-size: clamp(16px, 1.8vw, 24px);
-            /* 隨螢幕大小調整 */
-            writing-mode: vertical-rl;
-            transform: rotate(360deg);
-            /* 文字垂直顯示 */
-        }
-    </style>
 </head>
 
 <body>
@@ -106,34 +53,20 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand d-flex align-items-center mt-lg-2" href="#">
-                    <img src="{{ asset('images/logo.png') }}"></a>
+                    <img src="{{ asset('images/logo.png') }}" height="42"></a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-easing="linear" href="#About">關於我們</a></li>
-                    <li><a data-easing="linear" href="#News">最新消息</a></li>
-                    <li><a data-easing="linear" href="#Video">媒體介紹</a></li>
-                    <li><a data-easing="linear" href="#Product">美味菜單</a></li>
-                    <li><a data-easing="linear" href="#Blog">說說汕頭</a></li>
-                    <li><a data-easing="linear" href="#Contact">聯絡我們</a></li>
-                    <li><a data-easing="linear" href="https://inline.app/booking/-MbjQ6ROwxCzMZJs6kUC:inline-live-2"
-                            target="_blank">線上訂位</a></li>
-                    <li class="active"><a class="circle" data-easing="linear" href="#"><i
-                                class="icon-home"></i></a>
-                    </li>
+                    <li><a data-easing="linear" href="#About">關於璽室</a></li>
+                    <li><a data-easing="linear" href="#News">璽室動態</a></li>
+                    <li><a data-easing="linear" href="#Video">璽室映像</a></li>
+                    <li><a data-easing="linear" href="#Product">璽室體驗</a></li>
+                    <li><a data-easing="linear" href="#Blog">璽室誌</a></li>
+                    <li><a data-easing="linear" href="#Contact">聯絡璽室</a></li>
                 </ul>
             </div>
         </div>
     </header>
-
-    <div class="sidebar">
-        <a href="https://inline.app/booking/-MbjQ6ROwxCzMZJs6kUC:inline-live-2" target="_blank">
-            <div class="icon">
-                <i class="fas fa-calendar-alt"></i>
-            </div>
-            <div class="text">線上訂位</div>
-        </a>
-    </div>
 
     {{-- main-slider Start --}}
     <section id="main-slider" class="no-margin">
@@ -230,7 +163,7 @@
     {{-- News Start --}}
     <div class="container-fluid fh5co-news" id="news">
         <div class="container">
-            <h2 class="text-light">最新消息 NEWS</h2>
+            <h2 class="text-light">璽室動態 NEWS</h2>
             <div class="row">
                 <div class="owl-carousel owl-carousel2 owl-theme">
                     @foreach ($data['news'] as $news)
@@ -283,7 +216,7 @@
     {{-- Porduct Start --}}
     <div class="section section-white container-fluid fh5co-news" style="background-color: #e9e0d7;">
         <div class="container">
-            <h2 class="text-light">美味菜單</h2>
+            <h2 class="text-light">空間與體驗 The Tourmaline Experience</h2>
             <div class="row">
                 <ul class="grid cs-style-3">
                     @foreach ($data['products'] as $product)
@@ -332,56 +265,24 @@
         <div class="container" id="contact">
             <div class="row">
                 <div class="col-lg-5">
-                    <h2 class="clip-text mt-0">CONTACT US</h2>
-                    <p class="text-light">若您有任何需求，歡迎填寫表單</p>
-                    <p><span class="email"><i class="fa fa-envelope"></i></span><b><a
-                                href="mailto:natuzzi85@gmail.com?subject=詢問訂餐、訂位問題 %0A%0A謝謝">natuzzi85@gmail.com</a></b>
-                    </p>
-
-                    <hr>
-
-                    <p class="text-light fw-bold mt-2"><strong>賽門汕頭火鍋 左營富民店</strong></p>
-                    <p><span class="phone"><i class="fas fa-map-marker-alt"></i></span><b><a
-                                href="https://maps.app.goo.gl/fwukMvjgvRfU18d79" target="_blank">高雄市左營區富民路39號</a></b>
-                    </p>
-                    <p><span class="phone"><i class="fa fa-phone"></i></span><b><a
-                                href="tel:+886-7-5568788">07-556-8788</a></b></p>
-                    <p><span class="phone"><i class="fas fa-clock"></i></span><b>週一至週日 11:00–14:00, 17:00–21:30</b>
-                    </p>
-
-                    <ul class="navbar-nav float-left social-links footer-social mt-0">
-                        <li class="nav-item"><a class="nav-link" href="https://www.instagram.com/simon__3941/"><i
-                                    class="fab fa-instagram"></i></a></li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="https://www.facebook.com/simon.swatow.hotpot"><i
-                                    class="fab fa-facebook-f"></i></a></li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="https://liff.line.me/1645278921-kWRPP32q/?accountId=134lsvjp"><i
-                                    class="fab fa-line"></i></a></li>
-                    </ul>
-
+                    <h2 class="clip-text mt-0" style="color: #ffffff;">CONTACT US</h2>
+                    <p class="text-light">若您有任何需求，歡迎與我們聯繫！</p>
+                    <p class="text-light fw-bold mt-2"><strong>光之石｜璽室·汗蒸<br>The Tourmaline Room</strong></p>
+                    <p><b><a href="tel:+886-2-2742-1002">電話：02-2742-1002</a></b></p>
+                    <p><b><a href="https://maps.app.goo.gl/fwukMvjgvRfU18d79"
+                                target="_blank">地址：臺北市松山區吉祥里八德路四段245巷56弄26號</a></b></p>
+                    <p><b>營業時間：<br>
+                            週一 11:00-21:00
+                            週二 11:00-21:00<br>
+                            週三 11:00-21:00
+                            週四 11:00-21:00<br>
+                            週五 11:00-21:00
+                            週六 11:00-21:00<br>
+                            週日 11:00-19:00
+                        </b></p>
+                    <p><b>LINE@：<br><img src="images/qr.jpg" alt="" style=""></b></p>
                     <hr>
                     <div class="clear pt-4"></div>
-
-                    <p class="text-light fw-bold mt-2"><strong>賽門汕頭火鍋文衡店</strong></p>
-                    <p><span class="phone"><i class="fas fa-map-marker-alt"></i></span><b><a
-                                href="https://maps.app.goo.gl/v9VsJQeGgGMRfkoS8"
-                                target="_blank">高雄市鳳山區文衡路592號2樓</a></b></p>
-                    <p><span class="phone"><i class="fa fa-phone"></i></span><b><a
-                                href="tel:+886-7-7778511">07-777-8511</a></b></p>
-                    <p><span class="phone"><i class="fas fa-clock"></i></span><b>週一到週五 17:00–23:00<br>&nbsp;　 週六、週日
-                            11:30–14:30, 17:00–23:00</b></p>
-
-                    <ul class="navbar-nav float-left social-links footer-social mt-0">
-                        <li class="nav-item"><a class="nav-link"
-                                href="https://www.instagram.com/explore/locations/1753896278193094/"><i
-                                    class="fab fa-instagram"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/simon.Inn.2F"><i
-                                    class="fab fa-facebook-f"></i></a></li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="https://liff.line.me/1645278921-kWRPP32q/?accountId=134lsvjp"><i
-                                    class="fab fa-line"></i></a></li>
-                    </ul>
                 </div>
 
                 <div class="col-lg-7">
@@ -404,7 +305,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="p-2">
-                                    <button type="button" class="read-more" onclick="createContactBtn()">送出</button>
+                                    <button class="read-more" onclick="createContactBtn()">送出</button>
                                 </td>
                             </tr>
                         </table>
@@ -418,7 +319,7 @@
     {{-- Footer Start --}}
     <div class="container-fluid copy">
         <div class="col-lg-12">
-            <p class="text-light">賽門汕頭火鍋版權所有 ©2024.</p>
+            <p class="text-light">光之石｜璽室·汗蒸 版權所有 ©2026</p>
         </div>
     </div>
     <div class="footer"></div>

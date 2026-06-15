@@ -26,7 +26,7 @@
     <nav class="" aria-label="breadcrumb">
         <ol class="breadcrumb d-flex justify-content-start lh-lg m-0 ms-3">
             <li class="breadcrumb-item">前台設定</li>
-            <li class="breadcrumb-item col">部落格</li>
+            <li class="breadcrumb-item col">璽室誌</li>
         </ol>
     </nav>
 
