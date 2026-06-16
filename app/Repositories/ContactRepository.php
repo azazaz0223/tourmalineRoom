@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Models\Contact;
 
+use Carbon\Carbon;
+
 class ContactRepository
 {
 
@@ -20,12 +22,24 @@ class ContactRepository
     {
         $query = Contact::query();
 
+
         if ($request->has('started_date') && !$request->has('ended_date')) {
-            $query->where('created_at', '>=', $request->started_date);
-        } else if (!$request->has('started_date') && $request->has('ended_date')) {
-            $query->where('created_at', '<=', $request->ended_date);
-        } else if ($request->has('started_date') && $request->has('ended_date')) {
-            $query->whereBetween('created_at', [$request->started_date, $request->ended_date]);
+            $query->where(
+                'created_at',
+                '>=',
+                Carbon::parse($request->started_date)->startOfDay()
+            );
+        } elseif (!$request->has('started_date') && $request->has('ended_date')) {
+            $query->where(
+                'created_at',
+                '<=',
+                Carbon::parse($request->ended_date)->endOfDay()
+            );
+        } elseif ($request->has('started_date') && $request->has('ended_date')) {
+            $query->whereBetween('created_at', [
+                Carbon::parse($request->started_date)->startOfDay(),
+                Carbon::parse($request->ended_date)->endOfDay(),
+            ]);
         }
 
         if ($request->has('isHandle')) {
