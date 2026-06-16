@@ -8,7 +8,7 @@ class NewsRepository
 {
     public function findAllForFront()
     {
-        return News::limit(20)->orderBy('sort', 'desc')->get();
+        return News::limit(20)->where("status", 1)->orderBy('sort', 'desc')->get();
     }
 
     public function findAll()

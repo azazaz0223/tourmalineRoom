@@ -175,7 +175,7 @@
                                         <h5 class="ellipsis1">{{ $news->title }}</h5>
                                     </label>
                                     <p class="card-text ellipsis3">{{ $news->content }}</p>
-                                    <label class="post-btn mgt5 finger"><i class=" fa fa-arrow-right"></i></label>
+                                    <label class="post-btn mgt5 finger"></label>
                                     <input type="hidden" id="news_title{{ $news->id }}"
                                         value="{{ $news->title }}">
                                     <input type="hidden" id="news_content{{ $news->id }}"
