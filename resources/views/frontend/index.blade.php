@@ -125,7 +125,7 @@
                         <h6 class="title-primary">{{ $data['about']->en_title }}</h6>
                         <h1 class="title-blue">{{ $data['about']->zh_title }}</h1>
                     </div>
-                    <p class="text-light mb-3">{{ $data['about']->content }}</p>
+                    <p class="text-lightt mb-3">{{ $data['about']->content }}</p>
                 </div>
                 <div class="col-xl-5 gallery">
                     <div class="row no-gutters h-100">
