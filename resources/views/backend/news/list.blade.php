@@ -17,18 +17,18 @@
                 <div class="card-body border-bottom">
                     <div class="d-flex justify-content-start gap-3 mb-3">
                         <div class="w-auto">
-                            <div class="dive_sub">動態標題</div>
+                            <div class="dive_sub">動態大標</div>
                         </div>
                         <div class="col">
-                            <input type="text" name="title" class="form-control" placeholder="請輸入標題">
+                            <input type="text" name="title" class="form-control" placeholder="請輸入動態大標">
                         </div>
                     </div>
                     <div class="d-flex justify-content-start gap-3 mb-3">
                         <div class="w-auto col-1">
-                            <div class="dive_sub">內文描述</div>
+                            <div class="dive_sub">動態副標</div>
                         </div>
                         <div class="col">
-                            <textarea name="content" class="form-control search_input easein mb-0" rows="2" placeholder="請輸入內文描述"></textarea>
+                            <textarea name="content" class="form-control search_input easein mb-0" rows="2" placeholder="請輸入動態副標"></textarea>
                         </div>
                     </div>
                     <div class="d-flex justify-content-start align-items-center gap-3 mb-3">
@@ -58,7 +58,7 @@
 
                 <div class="card-body border-bottom d-flex justify-content-between gap-3">
                     <div class="col-4 card-body fs-6 gray_l rounded-3">
-                        <label class="mb-2">上傳璽室動態圖</label>
+                        <label class="mb-2">上傳璽室動態圖<span style="color: red">(只接受jpg、png,尺寸建議1200*800)</span></label>
                         <div class="c-mainCard__item">
                             <div class="l-upload l-upload--notSpace">
                                 <div class="card-body fs-6 gray_l rounded-3">
@@ -158,11 +158,28 @@
     <script>
         function reviewImage(element) {
             if (element.files && element.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $("#" + element.id + "Img").attr('src', e.target.result);
-                }
-                reader.readAsDataURL(element.files[0]);
+                const file = element.files[0];
+                const img = new Image();
+
+
+                img.onload = function() {
+                    console.log(this.width, this.height);
+                    if (this.width !== 1200 || this.height !== 800) {
+                        $("#alert_text").text("圖片尺寸必須為 1200x800px");
+                        $("#alert").modal("show");
+
+                        element.value = "";
+                        return;
+                    }
+
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $("#" + element.id + "Img").attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                };
+
+                img.src = URL.createObjectURL(file);
             }
         }
 
@@ -239,7 +256,8 @@
         }
 
         function deleteConfirmBtn(id) {
-            html = "<button class='dialogue-btn shadow-sm btn btn-primary' onclick='deleteSubmit(" + id + ")'>確認</button>";
+            html = "<button class='dialogue-btn shadow-sm btn btn-primary' onclick='deleteSubmit(" + id +
+                ")'>確認</button>";
             html += "<button class='dialogue-btn shadow-sm btn btn-primary' data-bs-dismiss='modal'>關閉</button>";
             $("#alert-body").hide();
             $("#alertBtn").html(html);

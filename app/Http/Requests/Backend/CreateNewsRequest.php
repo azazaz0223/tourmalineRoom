@@ -18,7 +18,7 @@ class CreateNewsRequest extends BaseRequest
         return [
             "title" => "required|string",
             "content" => "required|string",
-            "image" => "required|image|mimes:jpeg,png,jpg",
+            "image" => "required|image|mimes:jpeg,png,jpg|dimensions:width=1200,height=800",
             "content_text" => "required|string",
             "content_image" => "required|image|mimes:jpeg,png,jpg",
             "media_url" => "required|string",
