@@ -13,8 +13,6 @@
                 <time datetime="2026-03-01">{{ $blog->created_at->format('Y-m-d') }}</time>
                 <h3><a href="{{ route('frontend.blog.show', $blog->id) }}">{{ $blog->title }}</a>
                 </h3>
-                <a class="post-btn" href="{{ route('frontend.blog.show', $blog->id) }}"><i
-                        class="fa fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
