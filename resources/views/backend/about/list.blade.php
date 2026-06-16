@@ -94,11 +94,11 @@
                         <form id="update">
                             <div class="row col-12 mb-2 gx-0">
                                 <div class="col-12">
-                                    <div class="dive_sub">上傳首頁圖片/修改圖片</div>
+                                    <div class="dive_sub" id="modal_image_text">上傳首頁圖片/修改圖片</div>
                                 </div>
                                 <div class="col">
                                     <input type="file" class="form-control" name="image"
-                                        aria-describedby="inputFileAdd" aria-label="Upload">
+                                        aria-describedby="inputFileAdd" aria-label="Upload" onchange="reviewImage(this)">
                                 </div>
                             </div>
                             <div class="row col-12 mb-2 gx-0">
@@ -119,11 +119,11 @@
                             </div>
                             <div class="row col-12 mb-2 gx-0">
                                 <div class="col-12">
-                                    <div class="dive_sub" id="modal_image_text">上傳內頁圖片/修改圖片</div>
+                                    <div class="dive_sub">上傳內頁圖片/修改圖片</div>
                                 </div>
                                 <div class="col">
                                     <input type="file" class="form-control" name="content_image"
-                                        aria-describedby="inputFileAdd" aria-label="Upload" onchange="reviewImage(this)">
+                                        aria-describedby="inputFileAdd" aria-label="Upload">
                                 </div>
                             </div>
                         </form>
@@ -144,14 +144,12 @@
             $('#update input').val('');
         }
 
-        function reviewImage(element) {
+        function reviewImage(element, flag) {
             if (element.files && element.files[0]) {
                 const file = element.files[0];
                 const img = new Image();
 
-
                 img.onload = function() {
-                    console.log(this.width, this.height);
                     switch (image_id) {
                         case 1:
                             if (this.width !== 800 || this.height !== 1200) {
@@ -234,11 +232,11 @@
 
             switch (id) {
                 case 1:
-                    $("#modal_image_text").html('上傳內頁圖片/修改圖片<span style="color: red">(只接受jpg、png,尺寸建議800*1200)</span>');
+                    $("#modal_image_text").html('上傳首頁圖片/修改圖片<span style="color: red">(只接受jpg、png,尺寸建議800*1200)</span>');
                     break;
 
                 default:
-                    $("#modal_image_text").html('上傳內頁圖片/修改圖片<span style="color: red">(只接受jpg、png,尺寸建議1200*800)</span>');
+                    $("#modal_image_text").html('上傳首頁圖片/修改圖片<span style="color: red">(只接受jpg、png,尺寸建議1200*800)</span>');
                     break;
             }
         }

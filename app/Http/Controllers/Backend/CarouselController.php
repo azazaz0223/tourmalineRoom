@@ -51,14 +51,14 @@ class CarouselController extends Controller
             }
         }
 
-        if ($request->hasFile('updateImages')) {
+        if (isset($request['updateIds'])) {
             $updateImages = $request->file('updateImages');
 
             if ($request->hasFile('updateContentImages')) {
                 $updateContentImages = $request->file('updateContentImages');
             }
 
-            foreach ($request['updateImages'] as $key => $value) {
+            foreach ($request['updateIds'] as $key => $value) {
                 try {
                     $data = [
                         "title" => $request['updateTitles'][$key],
