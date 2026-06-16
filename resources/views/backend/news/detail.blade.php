@@ -61,11 +61,11 @@
 
                 <div class="card-body border-bottom d-flex justify-content-between gap-3">
                     <div class="col-4 card-body fs-6 gray_l rounded-3">
-                        <label class="mb-2">上傳最新消息圖</label>
+                        <label class="mb-2">上傳璽室動態圖<span style="color: red">(只接受jpg、png,尺寸建議1200*800)</span></label>
                         <div class="c-mainCard__item">
                             <div class="l-upload l-upload--notSpace">
                                 <div class="card-body fs-6 gray_l rounded-3">
-                                    <input type="file" name="image" id="news" onchange="reviewImage(this)"
+                                    <input type="file" name="image" id="news" onchange="reviewImage(this,true)"
                                         class="form-control search_input product-hover easein">
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                     </div>
 
                     <div class="col-8 card-body fs-6 gray_l rounded-3">
-                        <label class="mb-2">預覽最新消息圖</label>
+                        <label class="mb-2">預覽璽室動態圖</label>
                         <div class="p-0">
                             <img id="newsImg" class="mt-3" src="{{ asset($news->image) }}">
                         </div>
@@ -93,11 +93,12 @@
 
                 <div class="card-body border-bottom d-flex justify-content-between gap-3">
                     <div class="col-4 card-body fs-6 gray_l rounded-3">
-                        <label class="mb-2">上傳項目內容圖</label>
+                        <label class="mb-2">上傳璽室動態內容圖</label>
                         <div class="c-mainCard__item">
                             <div class="l-upload l-upload--notSpace">
                                 <div class="card-body fs-6 gray_l rounded-3">
-                                    <input type="file" name="content_image" id="newsContent" onchange="reviewImage(this)"
+                                    <input type="file" name="content_image" id="newsContent"
+                                        onchange="reviewImage(this,false)"
                                         class="form-control search_input product-hover easein">
                                 </div>
                             </div>
@@ -105,7 +106,7 @@
                     </div>
 
                     <div class="col-8 card-body fs-6 gray_l rounded-3">
-                        <label class="mb-2">預覽項目內容圖</label>
+                        <label class="mb-2">預覽璽室動態內容圖</label>
                         <div class="p-0">
                             <img id="newsContentImg" class="mt-3" src="{{ asset($news->content_image) }}">
                         </div>
@@ -122,13 +123,31 @@
     </div>
 
     <script>
-        function reviewImage(element) {
+        function reviewImage(element, flag) {
             if (element.files && element.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $("#" + element.id + "Img").attr('src', e.target.result);
-                }
-                reader.readAsDataURL(element.files[0]);
+                const file = element.files[0];
+                const img = new Image();
+
+
+                img.onload = function() {
+                    if (flag) {
+                        if (this.width !== 1200 || this.height !== 800) {
+                            $("#alert_text").text("圖片尺寸必須為 1200x800px");
+                            $("#alert").modal("show");
+
+                            element.value = "";
+                            return;
+                        }
+                    }
+
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $("#" + element.id + "Img").attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                };
+
+                img.src = URL.createObjectURL(file);
             }
         }
 
