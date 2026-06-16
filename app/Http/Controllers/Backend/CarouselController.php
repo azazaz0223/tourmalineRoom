@@ -51,19 +51,17 @@ class CarouselController extends Controller
             }
         }
 
-        if (isset($request['updateTitles'])) {
-            if ($request->hasFile('updateImages')) {
-                $updateImages = $request->file('updateImages');
-            }
+        if ($request->hasFile('updateImages')) {
+            $updateImages = $request->file('updateImages');
 
             if ($request->hasFile('updateContentImages')) {
                 $updateContentImages = $request->file('updateContentImages');
             }
 
-            foreach ($request['updateTitles'] as $key => $value) {
+            foreach ($request['updateImages'] as $key => $value) {
                 try {
                     $data = [
-                        "title" => $value,
+                        "title" => $request['updateTitles'][$key],
                         "subtitle" => $request['updateSubtitles'][$key],
                         "content" => $request['updateContents'][$key],
                         "content_text" => $request['updateContentTexts'][$key]
@@ -84,11 +82,11 @@ class CarouselController extends Controller
             }
         }
 
-        if (isset($request['titles'])) {
-            foreach ($request['titles'] as $key => $value) {
+        if ($request->hasFile('images')) {
+            foreach ($request['images'] as $key => $value) {
                 try {
                     $data = [
-                        "title" => $value,
+                        "title" => $request['titles'][$key],
                         "subtitle" => $request['subtitles'][$key],
                         "content" => $request['contents'][$key],
                         "content_text" => $request['contentTexts'][$key]
