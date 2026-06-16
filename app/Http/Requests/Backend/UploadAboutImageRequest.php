@@ -15,8 +15,8 @@ class UploadAboutImageRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            "title" => "required|string",
-            "content" => "required|string",
+            "title" => "nullable|string",
+            "content" => "nullable|string",
             "image" => "nullable|image|mimes:jpeg,png,jpg",
             "content_image" => "nullable|image|mimes:jpeg,png,jpg"
         ];

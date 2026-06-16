@@ -27,8 +27,7 @@
                         <div class="dive_sub">中文大標</div>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" id="zh_title"
-                            value="{{ $data ? $data->zh_title : '' }}">
+                        <textarea class="form-control search_input easein mb-0" rows="1" id="zh_title">{{ $data ? $data->zh_title : '' }}</textarea>
                     </div>
                 </div>
 
@@ -95,15 +94,7 @@
                         <form id="update">
                             <div class="row col-12 mb-2 gx-0">
                                 <div class="col-12">
-                                    <div class="dive_sub">標題</div>
-                                </div>
-                                <div class="col">
-                                    <input type="text" name="title" id="modal_title" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row col-12 mb-2 gx-0">
-                                <div class="col-12">
-                                    <div class="dive_sub">上傳圖片 / 更改圖片</div>
+                                    <div class="dive_sub">上傳首頁圖片/修改圖片</div>
                                 </div>
                                 <div class="col">
                                     <input type="file" class="form-control" name="image"
@@ -112,7 +103,15 @@
                             </div>
                             <div class="row col-12 mb-2 gx-0">
                                 <div class="col-12">
-                                    <div class="dive_sub">內文</div>
+                                    <div class="dive_sub">內頁大標</div>
+                                </div>
+                                <div class="col">
+                                    <input type="text" name="title" id="modal_title" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row col-12 mb-2 gx-0">
+                                <div class="col-12">
+                                    <div class="dive_sub">內頁內文</div>
                                 </div>
                                 <div class="col">
                                     <textarea name="content" id="modal_content" class="form-control search_input easein mb-0" rows="2"></textarea>
@@ -120,7 +119,7 @@
                             </div>
                             <div class="row col-12 mb-2 gx-0">
                                 <div class="col-12">
-                                    <div class="dive_sub">上傳內容圖片 / 更改內容圖片</div>
+                                    <div class="dive_sub">上傳內頁圖片/修改圖片</div>
                                 </div>
                                 <div class="col">
                                     <input type="file" class="form-control" name="content_image"
