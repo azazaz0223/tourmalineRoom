@@ -52,8 +52,10 @@ class NewsController extends Controller
         $image_url = $this->uploadImageService->uploadImage($news->id, 'news', $request->file('image'));
         $this->newsService->update($news->id, ["image" => $image_url]);
 
-        $content_image_url = $this->uploadImageService->uploadImage($news->id . "content", 'news', $request->file('content_image'));
-        $this->newsService->update($news->id, ["content_image" => $content_image_url]);
+        if ($request->hasFile('content_image') && $request->file('content_image')->isValid()) {
+            $content_image_url = $this->uploadImageService->uploadImage($news->id . "content", 'news', $request->file('content_image'));
+            $this->newsService->update($news->id, ["content_image" => $content_image_url]);
+        }
 
         return $this->successResponse(null, 200);
     }

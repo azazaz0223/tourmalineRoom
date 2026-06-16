@@ -17,17 +17,17 @@
                 <div class="card-body border-bottom">
                     <div class="d-flex justify-content-start gap-3 mb-3">
                         <div class="w-auto">
-                            <div class="dive_sub">體驗標題</div>
+                            <div class="dive_sub">首頁大標</div>
                         </div>
                         <div class="col">
-                            <input type="text" name="title" class="form-control" placeholder="請輸入標題"
+                            <input type="text" name="title" class="form-control" placeholder="請輸入首頁大標"
                                 value="{{ $product->title }}">
                         </div>
                         <div class="w-auto">
-                            <div class="dive_sub">體驗副標</div>
+                            <div class="dive_sub">首頁副標</div>
                         </div>
                         <div class="col-3">
-                            <input type="text" name="subtitle" class="form-control" placeholder="請輸入副標"
+                            <input type="text" name="subtitle" class="form-control" placeholder="請輸入首頁副標"
                                 value="{{ $product->subtitle }}">
                         </div>
                     </div>
@@ -43,11 +43,11 @@
 
                 <div class="card-body border-bottom d-flex justify-content-between gap-3">
                     <div class="col-4 card-body fs-6 gray_l rounded-3">
-                        <label class="mb-2">上傳體驗介紹圖</label>
+                        <label class="mb-2">上傳首頁縮圖<span style="color: red">(只接受jpg、png,尺寸建議1200*800)</span></label>
                         <div class="c-mainCard__item">
                             <div class="l-upload l-upload--notSpace">
                                 <div class="card-body fs-6 gray_l rounded-3">
-                                    <input type="file" name="image" id="product" onchange="reviewImage(this)"
+                                    <input type="file" name="image" id="product" onchange="reviewImage(this,true)"
                                         class="form-control search_input product-hover easein">
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="col-8 card-body fs-6 gray_l rounded-3">
-                        <label class="mb-2">預覽體驗介紹圖</label>
+                        <label class="mb-2">預覽首頁縮圖</label>
                         <div class="p-0">
                             <img id="productImg" class="mt-3" src="{{ asset($product->image) }}">
                         </div>
@@ -69,7 +69,8 @@
                             <div class="l-upload l-upload--notSpace">
                                 <div class="card-body fs-6 gray_l rounded-3">
                                     <input type="file" name="content_image" id="productContent"
-                                        onchange="reviewImage(this)" class="form-control search_input product-hover easein">
+                                        onchange="reviewImage(this,false)"
+                                        class="form-control search_input product-hover easein">
                                 </div>
                             </div>
                         </div>
@@ -93,13 +94,31 @@
     </div>
 
     <script>
-        function reviewImage(element) {
+        function reviewImage(element, flag) {
             if (element.files && element.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $("#" + element.id + "Img").attr('src', e.target.result);
-                }
-                reader.readAsDataURL(element.files[0]);
+                const file = element.files[0];
+                const img = new Image();
+
+
+                img.onload = function() {
+                    if (flag) {
+                        if (this.width !== 1200 || this.height !== 800) {
+                            $("#alert_text").text("圖片尺寸必須為 1200x800px");
+                            $("#alert").modal("show");
+
+                            element.value = "";
+                            return;
+                        }
+                    }
+
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $("#" + element.id + "Img").attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                };
+
+                img.src = URL.createObjectURL(file);
             }
         }
 
@@ -116,12 +135,6 @@
                     case 'title':
                         if (pair[1] == '') {
                             $("#alert_text").text('請輸入標題!');
-                            $("#alert").modal("show");
-                            return
-                        }
-                    case 'content':
-                        if (pair[1] == '') {
-                            $("#alert_text").text('請輸入內容!');
                             $("#alert").modal("show");
                             return
                         }

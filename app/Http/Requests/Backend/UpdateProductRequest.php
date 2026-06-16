@@ -16,9 +16,9 @@ class UpdateProductRequest extends BaseRequest
     {
         return [
             "title" => "required|string",
-            "subtitle" => "required|string",
-            "content" => "required|string",
-            "image" => "nullable|image|mimes:jpeg,png,jpg",
+            "subtitle" => "nullable|string",
+            "content" => "nullable|string",
+            "image" => "nullable|image|mimes:jpeg,png,jpg|dimensions:width=1200,height=800",
             "content_image" => "nullable|image|mimes:jpeg,png,jpg",
         ];
     }

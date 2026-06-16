@@ -50,8 +50,10 @@ class ProductController extends Controller
         $image_url = $this->uploadImageService->uploadImage($product->id, 'product', $request->file('image'));
         $this->productService->update($product->id, ["image" => $image_url]);
 
-        $content_image_url = $this->uploadImageService->uploadImage($product->id . "content", 'product', $request->file('content_image'));
-        $this->productService->update($product->id, ["content_image" => $content_image_url]);
+        if ($request->hasFile('content_image') && $request->file('content_image')->isValid()) {
+            $content_image_url = $this->uploadImageService->uploadImage($product->id . "content", 'product', $request->file('content_image'));
+            $this->productService->update($product->id, ["content_image" => $content_image_url]);
+        }
 
         return $this->successResponse(null, 200);
     }
