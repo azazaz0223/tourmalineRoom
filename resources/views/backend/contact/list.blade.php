@@ -45,10 +45,11 @@
                         <input type="text" name="name" class="form-control" value="{{ request('name') }}">
                     </div>
                     <div class="w-auto col-1">
-                        <div class="dive_sub">Email</div>
+                        <div class="dive_sub">連絡電話</div>
                     </div>
                     <div class="col">
-                        <input type="text" name="email" class="form-control" value="{{ request('email') }}">
+                        <input type="text" class="form-control" maxlength="10" pattern="^09\d{8}$" id="phone"
+                            oninput="validatePhone(this)" value="{{ request('phone') }}">
                     </div>
                 </div>
                 <button type="button" onclick="selectBtn()"
@@ -62,7 +63,7 @@
                             <th class=""></th>
                             <th>留言日期</th>
                             <th>姓名</th>
-                            <th>Email</th>
+                            <th>連絡電話</th>
                             <th>狀態</th>
                             <th>備註</th>
                         </tr>
@@ -70,14 +71,11 @@
 
                     <tbody>
                         @foreach ($list as $key => $contact)
-                            <tr>
+                            <tr onclick="showBtn({{ $contact->id }})" data-bs-toggle="modal" data-bs-target="#checkDetail">
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $contact->created_at }}</td>
-                                <td>
-                                    <a href="#" onclick="showBtn({{ $contact->id }})" data-bs-toggle="modal"
-                                        data-bs-target="#checkDetail">{{ $contact->name }}</a>
-                                </td>
-                                <td>{{ $contact->email }}</td>
+                                <td>{{ $contact->name }} </td>
+                                <td>{{ $contact->phone }}</td>
                                 <td>
                                     @if ($contact->isHandle == 0)
                                         <span
@@ -87,7 +85,8 @@
                                             class="badge rounded-pill bg-info text-dark bg-opacity-25 fs-6 fw-normal">已回覆</span>
                                     @endif
                                 </td>
-                                <td>{{ $contact->note }}</td>
+                                <td style="max-width: 250px; white-space: normal; word-break: break-all;">
+                                    {{ $contact->note }}</td>
                                 <input type="hidden" id="content_{{ $contact->id }}" value="{{ $contact->content }}">
                                 <input type="hidden" id="isHandle_{{ $contact->id }}" value="{{ $contact->isHandle }}">
                                 <input type="hidden" id="note_{{ $contact->id }}" value="{{ $contact->note }}">
@@ -130,7 +129,7 @@
                                         <div class="dive_sub">備註</div>
                                     </div>
                                     <div class="col">
-                                        <input type="text" id="modal_note" class="form-control">
+                                        <textarea type="text" id="modal_note" class="form-control"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-12 pt-3 ps-5">
@@ -159,6 +158,18 @@
 
     <script>
         var patch_id;
+
+        function validatePhone(input) {
+            let val = input.value.replace(/[^\d]/g, '');
+
+            if (val.length >= 1 && val[0] !== '0') {
+                val = '';
+            } else if (val.length >= 2 && val.substring(0, 2) !== '09') {
+                val = '0';
+            }
+
+            input.value = val;
+        }
 
         function selectBtn() {
             const data = {
