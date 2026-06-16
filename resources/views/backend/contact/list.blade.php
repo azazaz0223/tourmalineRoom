@@ -48,8 +48,8 @@
                         <div class="dive_sub">連絡電話</div>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" maxlength="10" pattern="^09\d{8}$" id="phone"
-                            oninput="validatePhone(this)" value="{{ request('phone') }}">
+                        <input type="text" class="form-control" maxlength="10" pattern="^09\d{8}$" name="phone"
+                            id="phone" oninput="validatePhone(this)" value="{{ request('phone') }}">
                     </div>
                 </div>
                 <button type="button" onclick="selectBtn()"
@@ -177,7 +177,7 @@
                 ended_date: $("input[name='ended_date']").val(),
                 isHandle: $("select[name='isHandle']").val(),
                 name: $("input[name='name']").val(),
-                email: $("input[name='email']").val(),
+                phone: $("input[name='phone']").val(),
             }
 
             if (data.started_date != '' && data.ended_date != '' && data.ended_date < data.started_date) {
