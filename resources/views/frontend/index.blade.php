@@ -295,7 +295,9 @@
                                 <input type="text" class="form-control" id="contactName" placeholder="姓名">
                             </div>
                             <div class="col-md-6 col-xs-12 p-2">
-                                <input type="text" class="form-control" id="contactEmail" placeholder="Email">
+                                <input type="text" class="form-control" maxlength="10" pattern="^09\d{8}$"
+                                    inputmode="numeric" id="contactPhone" placeholder="連絡電話"
+                                    oninput="validatePhone(this)">
                             </div>
 
                             <tr>
@@ -496,12 +498,31 @@
             }
         }
 
+        function validatePhone(input) {
+            let val = input.value.replace(/[^\d]/g, '');
+
+            if (val.length >= 1 && val[0] !== '0') {
+                val = '';
+            } else if (val.length >= 2 && val.substring(0, 2) !== '09') {
+                val = '0';
+            }
+
+            input.value = val;
+        }
+
         function createContactBtn() {
             const csrfToken = $('meta[name="csrf-token"]').attr('content');
             const data = {
                 name: $("#contactName").val(),
-                email: $("#contactEmail").val(),
+                phone: $("#contactPhone").val(),
                 content: $("#contactContent").val()
+            }
+
+            const phonePattern = /^09\d{8}$/;
+            if (!phonePattern.test(data.phone)) {
+                let alert_text = "手機號碼錯誤!";
+                alert(alert_text);
+                return;
             }
 
             $.ajax({
