@@ -45,6 +45,8 @@ class NewsController extends Controller
             "content_text" => $request['content_text'],
             "media_url" => $request['media_url'],
             "mediaType" => $request['mediaType'],
+            "status" => $request['status'],
+            "sort" => $request['sort'] ?? 1
         ];
 
         $news = $this->newsService->create($data);
@@ -71,6 +73,8 @@ class NewsController extends Controller
             "content_text" => $request['content_text'],
             "media_url" => $request['media_url'],
             "mediaType" => $request['mediaType'],
+            "status" => $request['status'],
+            "sort" => $request['sort'] ?? 1
         ];
 
         $this->newsService->update($news->id, $data);

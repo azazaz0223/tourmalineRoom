@@ -17,20 +17,40 @@
                 <div class="card-body border-bottom">
                     <div class="d-flex justify-content-start gap-3 mb-3">
                         <div class="w-auto">
-                            <div class="dive_sub">動態標題</div>
+                            <div class="dive_sub">動態大標</div>
                         </div>
                         <div class="col">
-                            <input type="text" name="title" id="title" class="form-control" placeholder="請輸入標題"
+                            <input type="text" name="title" id="title" class="form-control" placeholder="請輸入動態大標"
                                 value="{{ $news->title }}">
                         </div>
                     </div>
                     <div class="d-flex justify-content-start gap-3 mb-3">
                         <div class="w-auto col-1">
-                            <div class="dive_sub">內文描述</div>
+                            <div class="dive_sub">動態副標</div>
                         </div>
                         <div class="col">
                             <textarea name="content" id="content1" class="form-control search_input easein mb-0" rows="2"
-                                placeholder="請輸入內文描述">{{ $news->content }}</textarea>
+                                placeholder="請輸入動態副標">{{ $news->content }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-start gap-3 mb-3">
+                        <div class="w-auto col-1">
+                            <div class="dive_sub">排序</div>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control" name="sort" min="0"
+                                value="{{ $news->sort }}">
+                        </div>
+                        <div class="w-auto col-1">
+                            <div class="dive_sub">上架設定</div>
+                        </div>
+                        <div class="col">
+                            <select class="select form-control" name="status">
+                                <option value="">請選擇上下架</option>
+                                <option value="1" @selected($news->status == 1)>上架</option>
+                                <option value="0" @selected($news->status == 0)>下架</option>
+                            </select>
                         </div>
                     </div>
                     <div class="d-flex justify-content-start align-items-center gap-3 mb-3">
@@ -176,6 +196,12 @@
                     case 'content_text':
                         if (pair[1] == '') {
                             $("#alert_text").text('請輸入內文內容!');
+                            $("#alert").modal("show");
+                            return
+                        }
+                    case 'status':
+                        if (pair[1] == "") {
+                            $("#alert_text").text('請選擇上下架!');
                             $("#alert").modal("show");
                             return
                         }

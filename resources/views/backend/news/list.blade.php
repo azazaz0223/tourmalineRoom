@@ -11,6 +11,54 @@
     <div class="container-fluid p-3 m-1">
 
         <div class="card col-12 rounded-3 bg-white mb-4">
+            <h2 class="fs-5 p-3 fw-bold border-bottom">璽室動態列表</h2>
+
+            <div class="card-body toScroll text-nowrap">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th class=""></th>
+                            <th>動態大標</th>
+                            <th>狀態</th>
+                            <th>動態內文描述</th>
+                            <th>排序</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach ($list as $news)
+                            <tr>
+                                <td>{{ $news->id }}</td>
+                                <td>{{ $news->title }}</td>
+                                <td>
+                                    @if ($news->status)
+                                        上架
+                                    @else
+                                        下架
+                                    @endif
+                                </td>
+                                <td class="ellipsis">{{ $news->content }}</td>
+                                <td>{{ $news->sort }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-light rounded-3 shadow-sm"
+                                        onclick="javascript:location.href='{{ route('backend.news.detail', $news->id) }}'"><i
+                                            class="far fa-edit"></i></button>
+                                    <button type="button" onclick="deleteConfirmBtn({{ $news->id }})"
+                                        class="btn btn-light rounded-3 shadow-sm"><i class="fas fa-times"></i></button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+                @empty(!$list)
+                    {{ $list->links('backend.pagination.pagination') }}
+                @endempty
+            </div>
+        </div>
+
+        <div class="card col-12 rounded-3 bg-white mb-4">
             <h2 class="fs-5 p-3 fw-bold border-bottom">璽室動態</h2>
 
             <form id="create">
@@ -29,6 +77,25 @@
                         </div>
                         <div class="col">
                             <textarea name="content" class="form-control search_input easein mb-0" rows="2" placeholder="請輸入動態副標"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-start gap-3 mb-3">
+                        <div class="w-auto col-1">
+                            <div class="dive_sub">排序</div>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control" name="sort" min="0">
+                        </div>
+                        <div class="w-auto col-1">
+                            <div class="dive_sub">上架設定</div>
+                        </div>
+                        <div class="col">
+                            <select class="select form-control" name="status">
+                                <option value="">請選擇上下架</option>
+                                <option value="1">上架</option>
+                                <option value="0" selected>下架</option>
+                            </select>
                         </div>
                     </div>
                     <div class="d-flex justify-content-start align-items-center gap-3 mb-3">
@@ -115,45 +182,6 @@
                     onclick="createBtn()">新增</button>
             </div>
         </div>
-
-
-        <div class="card col-12 rounded-3 bg-white mb-4">
-            <h2 class="fs-5 p-3 fw-bold border-bottom">璽室動態列表</h2>
-
-            <div class="card-body toScroll text-nowrap">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th class=""></th>
-                            <th>動態標題</th>
-                            <th>動態內文描述</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach ($list as $news)
-                            <tr>
-                                <td>{{ $news->id }}</td>
-                                <td>{{ $news->title }}</td>
-                                <td class="ellipsis">{{ $news->content }}</td>
-                                <td>
-                                    <button type="button" class="btn btn-light rounded-3 shadow-sm"
-                                        onclick="javascript:location.href='{{ route('backend.news.detail', $news->id) }}'"><i
-                                            class="far fa-edit"></i></button>
-                                    <button type="button" onclick="deleteConfirmBtn({{ $news->id }})"
-                                        class="btn btn-light rounded-3 shadow-sm"><i class="fas fa-times"></i></button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-                @empty(!$list)
-                    {{ $list->links('backend.pagination.pagination') }}
-                @endempty
-            </div>
-        </div>
     </div>
 
     <script>
@@ -218,6 +246,12 @@
                     case 'content_image':
                         if (pair[1].size == "0") {
                             $("#alert_text").text('請選擇內文圖片!');
+                            $("#alert").modal("show");
+                            return
+                        }
+                    case 'status':
+                        if (pair[1] == "") {
+                            $("#alert_text").text('請選擇上下架!');
                             $("#alert").modal("show");
                             return
                         }

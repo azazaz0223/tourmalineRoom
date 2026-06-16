@@ -8,12 +8,12 @@ class NewsRepository
 {
     public function findAllForFront()
     {
-        return News::limit(20)->orderBy('id', 'desc')->get();
+        return News::limit(20)->orderBy('sort', 'desc')->get();
     }
 
     public function findAll()
     {
-        return News::orderBy('id', 'desc')->paginate(20);
+        return News::orderBy('sort', 'desc')->paginate(20);
     }
 
     public function create($request)

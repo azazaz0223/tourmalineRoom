@@ -16,6 +16,8 @@ class News extends Model
         'content_text',
         'content_image',
         "media_url",
-        "mediaType"
+        "mediaType",
+        'status',
+        'sort'
     ];
 }
