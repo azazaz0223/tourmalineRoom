@@ -144,11 +144,28 @@
 
         function reviewImage(element) {
             if (element.files && element.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $("#" + element.id + "Img").attr('src', e.target.result);
-                }
-                reader.readAsDataURL(element.files[0]);
+                const file = element.files[0];
+                const img = new Image();
+
+
+                img.onload = function() {
+                    console.log(this.width, this.height);
+                    if (this.width !== 1920 || this.height !== 750) {
+                        $("#alert_text").text("圖片尺寸必須為 1920x750px");
+                        $("#alert").modal("show");
+
+                        element.value = "";
+                        return;
+                    }
+
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $("#" + element.id + "Img").attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                };
+
+                img.src = URL.createObjectURL(file);
             }
         }
 
