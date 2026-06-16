@@ -163,7 +163,7 @@
     {{-- News Start --}}
     <div class="container-fluid fh5co-news" id="news">
         <div class="container">
-            <h2 class="text-light">璽室動態 NEWS</h2>
+            <h2 class="clip-text">璽室動態 NEWS</h2>
             <div class="row">
                 <div class="owl-carousel owl-carousel2 owl-theme">
                     @foreach ($data['news'] as $news)
@@ -216,7 +216,7 @@
     {{-- Porduct Start --}}
     <div class="section section-white container-fluid fh5co-news" style="background-color: #e9e0d7;">
         <div class="container">
-            <h2 class="text-light">空間與體驗 The Tourmaline Experience</h2>
+            <h2 class="clip-text">空間與體驗 The Tourmaline Experience</h2>
             <div class="row">
                 <ul class="grid cs-style-3">
                     @foreach ($data['products'] as $product)
@@ -247,6 +247,7 @@
     {{-- Blog Start --}}
     <section class="recent-posts">
         <div class="container">
+            <h2 class="clip-text" style="text-align: center;">璽室誌 The Tourmaline Journal</h2>
             <div class="row posts-wrapper" id="postGrid">
                 @include('frontend.blog-list', [
                     'blogs' => $data['blogs'],
