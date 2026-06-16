@@ -86,8 +86,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">三張圖片設定</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="remove()"></button>
                 </div>
                 <div class="modal-body">
                     <div class="bg-light p-3 rounded-3 dialog-box-content">
@@ -119,11 +119,11 @@
                             </div>
                             <div class="row col-12 mb-2 gx-0">
                                 <div class="col-12">
-                                    <div class="dive_sub">上傳內頁圖片/修改圖片</div>
+                                    <div class="dive_sub" id="modal_image_text">上傳內頁圖片/修改圖片</div>
                                 </div>
                                 <div class="col">
                                     <input type="file" class="form-control" name="content_image"
-                                        aria-describedby="inputFileAdd" aria-label="Upload">
+                                        aria-describedby="inputFileAdd" aria-label="Upload" onchange="reviewImage(this)">
                                 </div>
                             </div>
                         </form>
@@ -139,6 +139,45 @@
 
     <script>
         var image_id;
+
+        function remove() {
+            $('#update input').val('');
+        }
+
+        function reviewImage(element) {
+            if (element.files && element.files[0]) {
+                const file = element.files[0];
+                const img = new Image();
+
+
+                img.onload = function() {
+                    console.log(this.width, this.height);
+                    switch (image_id) {
+                        case 1:
+                            if (this.width !== 800 || this.height !== 1200) {
+                                $("#alert_text").text("圖片尺寸必須為 800x1200px");
+                                $("#alert").modal("show");
+
+                                element.value = "";
+                                return;
+                            }
+                            break;
+
+                        default:
+                            if (this.width !== 12000 || this.height !== 800) {
+                                $("#alert_text").text("圖片尺寸必須為 1200x758x");
+                                $("#alert").modal("show");
+
+                                element.value = "";
+                                return;
+                            }
+                            break;
+                    }
+                };
+
+                img.src = URL.createObjectURL(file);
+            }
+        }
 
         function updateBtn() {
             const csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -192,6 +231,16 @@
             $("#modal_title").val($("#image" + id + "_title").val());
             $("#modal_content").val($("#image" + id + "_content").val());
             $("#about3pic").modal("show");
+
+            switch (id) {
+                case 1:
+                    $("#modal_image_text").html('上傳內頁圖片/修改圖片<span style="color: red">(只接受jpg、png,尺寸建議800*1200)</span>');
+                    break;
+
+                default:
+                    $("#modal_image_text").html('上傳內頁圖片/修改圖片<span style="color: red">(只接受jpg、png,尺寸建議1200*800)</span>');
+                    break;
+            }
         }
 
         function updateImageInfoBtn() {
