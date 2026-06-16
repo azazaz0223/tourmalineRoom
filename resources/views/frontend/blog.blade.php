@@ -49,9 +49,6 @@
                 </div>
             </div>
         </nav>
-        <div class="jumbotron d-flex align-items-center"
-            style="background-image: url({{ asset('images/blog-slide.png') }})">
-        </div>
         <!-- Contact Form Section -->
         <section id="gtco-single-content" class="bg-white">
             <div class="container">
