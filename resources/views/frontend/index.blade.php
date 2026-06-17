@@ -364,6 +364,8 @@
     {{-- Back To Top --}}
     <a href="javascript:void(0);" class="js-back-to-top back-to-top">Top</a>
 
+    <script async src="https://www.instagram.com/embed.js"></script>
+
     <script>
         const youtubeUrl = @json($data['video']->media_url);
 
@@ -394,7 +396,9 @@
             const container = document.getElementById(IgId);
             container.innerHTML =
                 `<blockquote class="instagram-media" data-instgrm-permalink="${url}" data-instgrm-version="14"><a href="${url}"></a></blockquote>`;
-            window.instgrm.Embeds.process();
+            if (window.instgrm?.Embeds) {
+                window.instgrm.Embeds.process();
+            }
         }
 
         function replaceNewLine(text) {
