@@ -8,12 +8,12 @@ class ProductRepository
 {
     public function findAllForFront()
     {
-        return Product::limit(20)->orderBy('id', 'desc')->get();
+        return Product::limit(20)->where("status", 1)->orderBy('sort', 'desc')->get();
     }
 
     public function findAll()
     {
-        return Product::orderBy('id', 'desc')->paginate(20);
+        return Product::orderBy('sort', 'desc')->paginate(20);
     }
 
     public function create($request)

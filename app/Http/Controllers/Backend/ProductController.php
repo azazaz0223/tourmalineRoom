@@ -43,6 +43,8 @@ class ProductController extends Controller
             "title" => $request['title'],
             "subtitle" => $request['subtitle'],
             "content" => $request['content'],
+            "status" => $request['status'],
+            "sort" => $request['sort'] ?? 1
         ];
 
         $product = $this->productService->create($data);
@@ -67,6 +69,8 @@ class ProductController extends Controller
             "title" => $request['title'],
             "subtitle" => $request['subtitle'],
             "content" => $request['content'],
+            "status" => $request['status'],
+            "sort" => $request['sort'] ?? 1
         ];
 
         $this->productService->update($product->id, $data);

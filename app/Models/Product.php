@@ -15,5 +15,7 @@ class Product extends Model
         'content',
         'image',
         'content_image',
+        'status',
+        'sort'
     ];
 }

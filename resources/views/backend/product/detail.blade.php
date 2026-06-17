@@ -31,6 +31,26 @@
                                 value="{{ $product->subtitle }}">
                         </div>
                     </div>
+
+                    <div class="d-flex justify-content-start gap-3 mb-3">
+                        <div class="w-auto col-1">
+                            <div class="dive_sub">排序</div>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control" name="sort" min="0"
+                                value="{{ $product->sort }}">
+                        </div>
+                        <div class="w-auto col-1">
+                            <div class="dive_sub">上架設定</div>
+                        </div>
+                        <div class="col">
+                            <select class="select form-control" name="status">
+                                <option value="">請選擇上下架</option>
+                                <option value="1" @selected($product->status == 1)>上架</option>
+                                <option value="0" @selected($product->status == 0)>下架</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="d-flex justify-content-start gap-3 mb-3">
                         <div class="w-auto col-1">
                             <div class="dive_sub">內文描述</div>

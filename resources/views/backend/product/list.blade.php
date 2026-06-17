@@ -19,7 +19,9 @@
                             <th class=""></th>
                             <th>首頁大標</th>
                             <th>首頁副標</th>
+                            <th>狀態</th>
                             <th>體驗內文描述</th>
+                            <th>排序</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -30,7 +32,15 @@
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->title }}</td>
                                 <td>{{ $product->subtitle }}</td>
+                                <td>
+                                    @if ($product->status)
+                                        上架
+                                    @else
+                                        下架
+                                    @endif
+                                </td>
                                 <td class="ellipsis">{{ $product->content }}</td>
+                                <td>{{ $product->sort }}</td>
                                 <td>
                                     <button type="button" class="btn btn-light rounded-3 shadow-sm"
                                         onclick="javascript:location.href='{{ route('backend.product.detail', $product->id) }}'"><i
@@ -66,6 +76,25 @@
                         </div>
                         <div class="col-3">
                             <input type="text" name="subtitle" id="subtitle " class="form-control" placeholder="請輸入首頁副標">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-start gap-3 mb-3">
+                        <div class="w-auto col-1">
+                            <div class="dive_sub">排序</div>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control" name="sort" min="0">
+                        </div>
+                        <div class="w-auto col-1">
+                            <div class="dive_sub">上架設定</div>
+                        </div>
+                        <div class="col">
+                            <select class="select form-control" name="status">
+                                <option value="">請選擇上下架</option>
+                                <option value="1">上架</option>
+                                <option value="0" selected>下架</option>
+                            </select>
                         </div>
                     </div>
                     <div class="d-flex justify-content-start gap-3 mb-3">
@@ -180,6 +209,15 @@
                             Swal.fire({
                                 icon: "error",
                                 title: "請選擇圖片!",
+                                timer: 3000
+                            });
+                            return
+                        }
+                    case 'status':
+                        if (pair[1] == "") {
+                            Swal.fire({
+                                icon: "error",
+                                title: "請選擇上下架!",
                                 timer: 3000
                             });
                             return

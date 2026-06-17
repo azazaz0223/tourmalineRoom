@@ -18,6 +18,8 @@ class CreateProductRequest extends BaseRequest
             "title" => "required|string",
             "subtitle" => "nullable|string",
             "content" => "nullable|string",
+            "status" => "required|in:0,1",
+            "sort" => "nullable|integer|min:1",
             "image" => "required|image|mimes:jpeg,png,jpg|dimensions:width=1200,height=800",
             "content_image" => "nullable|image|mimes:jpeg,png,jpg",
         ];

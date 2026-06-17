@@ -20,6 +20,8 @@ class UpdateProductRequest extends BaseRequest
             "content" => "nullable|string",
             "image" => "nullable|image|mimes:jpeg,png,jpg|dimensions:width=1200,height=800",
             "content_image" => "nullable|image|mimes:jpeg,png,jpg",
+            "status" => "required|in:0,1",
+            "sort" => "nullable|integer|min:1",
         ];
     }
 }
