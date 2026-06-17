@@ -91,7 +91,7 @@
                                         <h2 class="animation animated-item-1">{{ $carousel->title }}</h2>
                                         <p class="animation animated-item-2">{{ $carousel->subtitle }}</p>
                                         <label class="btn btn-md animation animated-item-3"
-                                            onclick="carouselBtn({{ $carousel->id }})">More</label>
+                                            onclick="carouselBtn({{ $carousel->id }})">立即預約</label>
                                         <input type="hidden" id="carousel_title{{ $carousel->id }}"
                                             value="{{ $carousel->title }}">
                                         <input type="hidden" id="carousel_content{{ $carousel->id }}"

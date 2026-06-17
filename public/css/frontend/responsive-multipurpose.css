@@ -14,10 +14,14 @@
   .recent-posts .row .col-lg-6:nth-of-type(odd) .post-thumb {
     margin-top: 0;
     margin-left: 25px;
+	  
+    margin-right: 20px;
   }
   .recent-posts .row .col-lg-6:nth-of-type(even) .post-thumb {
     margin-bottom: 0;
     margin-right: 25px;
+	  
+	margin-left: 20px;
   }
 }
 
