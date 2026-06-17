@@ -138,8 +138,11 @@
                 img.onload = function() {
                     if (flag) {
                         if (this.width !== 1200 || this.height !== 800) {
-                            $("#alert_text").text("圖片尺寸必須為 1200x800px");
-                            $("#alert").modal("show");
+                            Swal.fire({
+                                icon: "error",
+                                title: "圖片尺寸必須為 1200x800px",
+                                timer: 3000
+                            });
 
                             element.value = "";
                             return;
@@ -165,14 +168,20 @@
                 switch (pair[0]) {
                     case 'title':
                         if (pair[1] == '') {
-                            $("#alert_text").text('請輸入標題!');
-                            $("#alert").modal("show");
+                            Swal.fire({
+                                icon: "error",
+                                title: "請輸入標題!",
+                                timer: 3000
+                            });
                             return
                         }
                     case 'image':
                         if (pair[1].size == "0") {
-                            $("#alert_text").text('請選擇圖片!');
-                            $("#alert").modal("show");
+                            Swal.fire({
+                                icon: "error",
+                                title: "請選擇圖片!",
+                                timer: 3000
+                            });
                             return
                         }
                 }
@@ -189,8 +198,13 @@
                 contentType: false,
                 success: function(response) {
                     if (response.code == '00') {
-                        $("#alert_text").text("新增成功");
-                        $("#alert").modal("show");
+                        Swal.fire({
+                            title: '新增成功!',
+                            icon: 'success',
+                            timer: 3000
+                        }).then((result) => {
+                            location.reload();
+                        });
                     };
                 },
                 error: function(xhr, status, error) {
@@ -199,50 +213,64 @@
                     if (xhr.status == '403') {
                         alert_text = "無此權限";
                     }
-                    $("#alert_text").text(alert_text);
-                    $("#alert").modal("show");
+
+                    Swal.fire({
+                        icon: "error",
+                        title: alert_text,
+                        timer: 3000
+                    });
+                    return
                 }
             });
         }
 
         function deleteConfirmBtn(id) {
-            html = "<button class='dialogue-btn shadow-sm btn btn-primary' onclick='deleteSubmit(" + id + ")'>確認</button>";
-            html += "<button class='dialogue-btn shadow-sm btn btn-primary' data-bs-dismiss='modal'>關閉</button>";
-            $("#alert-body").hide();
-            $("#alertBtn").html(html);
-            $("#alert").modal("show");
-        }
-
-        function deleteSubmit(id) {
             const csrfToken = $('meta[name="csrf-token"]').attr('content');
-            url = "{{ route('backend.product.delete', ':id') }}";
-            url = url.replace(':id', id);
-            $.ajax({
-                url: url,
-                type: "DELETE",
-                headers: {
-                    "X-CSRF-TOKEN": csrfToken
-                },
-                success: function(response) {
-                    if (response.code == '00') {
-                        html =
-                            "<button type='button' class='dialogue-btn shadow-sm btn btn-primary' data-bs-dismiss='modal' onclick='location.reload()'>確認重整</button>";
-                        html +=
-                            "<button type='button' class='dialogue-btn shadow-sm btn btn-primary' data-bs-dismiss='modal'>關閉</button>";
-                        $("#alertBtn").html(html);
-                        $("#alert-body").show();
-                        $("#alert_text").text("刪除成功!");
-                        $("#alert").modal("show");
-                    }
-                },
-                error: function(xhr, status, error) {
-                    let alert_text = "發生不可預期的錯誤";
+            Swal.fire({
+                title: '確認要刪除嗎？',
+                text: '刪除後無法撤銷！',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '是的，刪除！',
+                cancelButtonText: '取消',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    url = "{{ route('backend.product.delete', ':id') }}";
+                    url = url.replace(':id', id);
+                    $.ajax({
+                        url: url,
+                        type: "DELETE",
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken
+                        },
+                        success: function(response) {
+                            if (response.code == '00') {
+                                Swal.fire({
+                                    title: '刪除成功！',
+                                    icon: 'success',
+                                    timer: 3000
+                                }).then((result) => {
+                                    location.reload();
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            let alert_text = "發生不可預期的錯誤";
 
-                    if (xhr.status == '403') {
-                        alert_text = "無此權限";
-                    }
-                    $("#alert_text").text(alert_text);
-                    $("#alert").modal("show");
+                            if (xhr.status == '403') {
+                                alert_text = "無此權限";
+                            }
+
+                            Swal.fire({
+                                icon: "error",
+                                title: alert_text,
+                                timer: 3000
+                            });
+                            return
+                        }
+                    });
                 }
             });
         }

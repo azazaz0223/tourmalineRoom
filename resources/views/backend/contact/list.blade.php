@@ -181,9 +181,12 @@
             }
 
             if (data.started_date != '' && data.ended_date != '' && data.ended_date < data.started_date) {
-                $("#alert_text").text("查詢期間開始日期不得大於結束日期!");
-                $("#alert").modal("show");
-                return
+                Swal.fire({
+                    icon: "error",
+                    title: "查詢期間開始日期不得大於結束日期!",
+                    timer: 3000
+                });
+                return;
             }
 
             let urlParams = Object.entries(data)
@@ -224,8 +227,13 @@
                 data: data,
                 success: function(response) {
                     if (response.code == '00') {
-                        $("#alert_text").text("修改成功!");
-                        $("#alert").modal("show");
+                        Swal.fire({
+                            title: '修改成功!',
+                            icon: 'success',
+                            timer: 3000
+                        }).then((result) => {
+                            location.reload();
+                        });
                     }
                 },
                 error: function(xhr, status, error) {
@@ -234,8 +242,13 @@
                     if (xhr.status == '403') {
                         alert_text = "無此權限";
                     }
-                    $("#alert_text").text(alert_text);
-                    $("#alert").modal("show");
+
+                    Swal.fire({
+                        icon: "error",
+                        title: alert_text,
+                        timer: 3000
+                    });
+                    return
                 }
             });
         }

@@ -59,16 +59,25 @@
             };
 
             if (data.en_title == '') {
-                $("#alert_text").text("英文小標不得空白!");
-                $("#alert").modal("show");
+                Swal.fire({
+                    icon: "error",
+                    title: "英文小標不得空白!",
+                    timer: 3000
+                });
                 return
             } else if (data.zh_title == '') {
-                $("#alert_text").text("中文大標不得空白!");
-                $("#alert").modal("show");
+                Swal.fire({
+                    icon: "error",
+                    title: "中文大標不得空白!",
+                    timer: 3000
+                });
                 return
             } else if (data.media_url == '') {
-                $("#alert_text").text("媒體網址不得空白!");
-                $("#alert").modal("show");
+                Swal.fire({
+                    icon: "error",
+                    title: "媒體網址不得空白!",
+                    timer: 3000
+                });
                 return
             }
 
@@ -81,8 +90,13 @@
                 data: data,
                 success: function(response) {
                     if (response.code == '00') {
-                        $("#alert_text").text("修改成功!");
-                        $("#alert").modal("show");
+                        Swal.fire({
+                            title: '修改成功!',
+                            icon: 'success',
+                            timer: 3000
+                        }).then((result) => {
+                            location.reload();
+                        });
                     }
                 },
                 error: function(xhr, status, error) {
@@ -91,8 +105,13 @@
                     if (xhr.status == '403') {
                         alert_text = "無此權限";
                     }
-                    $("#alert_text").text(alert_text);
-                    $("#alert").modal("show");
+
+                    Swal.fire({
+                        icon: "error",
+                        title: alert_text,
+                        timer: 3000
+                    });
+                    return
                 }
             });
         }

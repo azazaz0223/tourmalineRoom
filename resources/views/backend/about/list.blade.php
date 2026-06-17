@@ -153,9 +153,11 @@
                     switch (image_id) {
                         case 1:
                             if (this.width !== 800 || this.height !== 1200) {
-                                $("#alert_text").text("圖片尺寸必須為 800x1200px");
-                                $("#alert").modal("show");
-
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "圖片尺寸必須為 800x1200px",
+                                    timer: 3000
+                                });
                                 element.value = "";
                                 return;
                             }
@@ -163,8 +165,11 @@
 
                         default:
                             if (this.width !== 12000 || this.height !== 800) {
-                                $("#alert_text").text("圖片尺寸必須為 1200x758x");
-                                $("#alert").modal("show");
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "圖片尺寸必須為 1200x758x",
+                                    timer: 3000
+                                });
 
                                 element.value = "";
                                 return;
@@ -186,16 +191,25 @@
             };
 
             if (data.en_title == '') {
-                $("#alert_text").text("英文小標不得空白!");
-                $("#alert").modal("show");
+                Swal.fire({
+                    icon: "error",
+                    title: "英文小標不得空白!",
+                    timer: 3000
+                });
                 return
             } else if (data.zh_title == '') {
-                $("#alert_text").text("中文大標不得空白!");
-                $("#alert").modal("show");
+                Swal.fire({
+                    icon: "error",
+                    title: "中文大標不得空白",
+                    timer: 3000
+                });
                 return
             } else if (data.content == '') {
-                $("#alert_text").text("內文描述不得空白!");
-                $("#alert").modal("show");
+                Swal.fire({
+                    icon: "error",
+                    title: "內文描述不得空白!",
+                    timer: 3000
+                });
                 return
             }
 
@@ -208,8 +222,13 @@
                 data: data,
                 success: function(response) {
                     if (response.code == '00') {
-                        $("#alert_text").text("修改成功!");
-                        $("#alert").modal("show");
+                        Swal.fire({
+                            title: '修改成功！',
+                            icon: 'success',
+                            timer: 3000
+                        }).then((result) => {
+                            location.reload();
+                        });
                     }
                 },
                 error: function(xhr, status, error) {
@@ -218,8 +237,13 @@
                     if (xhr.status == '403') {
                         alert_text = "無此權限";
                     }
-                    $("#alert_text").text(alert_text);
-                    $("#alert").modal("show");
+
+                    Swal.fire({
+                        icon: "error",
+                        title: alert_text,
+                        timer: 3000
+                    });
+                    return
                 }
             });
         }
@@ -258,8 +282,13 @@
                 contentType: false,
                 success: function(response) {
                     if (response.code == '00') {
-                        $("#alert_text").text("修改成功");
-                        $("#alert").modal("show");
+                        Swal.fire({
+                            title: '修改成功！',
+                            icon: 'success',
+                            timer: 3000
+                        }).then((result) => {
+                            location.reload();
+                        });
                     };
                 },
                 error: function(xhr, status, error) {
@@ -268,8 +297,13 @@
                     if (xhr.status == '403') {
                         alert_text = "無此權限";
                     }
-                    $("#alert_text").text(alert_text);
-                    $("#alert").modal("show");
+
+                    Swal.fire({
+                        icon: "error",
+                        title: alert_text,
+                        timer: 3000
+                    });
+                    return
                 }
             });
         }

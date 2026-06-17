@@ -126,8 +126,13 @@
                 contentType: false,
                 success: function(response) {
                     if (response.code == '00') {
-                        $("#alert_text").text("修改成功");
-                        $("#alert").modal("show");
+                        Swal.fire({
+                            title: '修改成功!',
+                            icon: 'success',
+                            timer: 3000
+                        }).then((result) => {
+                            location.reload();
+                        });
                     };
                 },
                 error: function(xhr, status, error) {
@@ -136,8 +141,13 @@
                     if (xhr.status == '403') {
                         alert_text = "無此權限";
                     }
-                    $("#alert_text").text(alert_text);
-                    $("#alert").modal("show");
+
+                    Swal.fire({
+                        icon: "error",
+                        title: alert_text,
+                        timer: 3000
+                    });
+                    return
                 }
             });
         }
@@ -151,8 +161,11 @@
                 img.onload = function() {
                     console.log(this.width, this.height);
                     if (this.width !== 1920 || this.height !== 750) {
-                        $("#alert_text").text("圖片尺寸必須為 1920x750px");
-                        $("#alert").modal("show");
+                        Swal.fire({
+                            icon: "error",
+                            title: "圖片尺寸必須為 1920x750px",
+                            timer: 3000
+                        });
 
                         element.value = "";
                         return;
@@ -237,8 +250,11 @@
                 switch (pair[0]) {
                     case 'images[]':
                         if (pair[1].size == "0") {
-                            $("#alert_text").text('請選擇圖片!');
-                            $("#alert").modal("show");
+                            Swal.fire({
+                                icon: "error",
+                                title: "請選擇圖片!",
+                                timer: 3000
+                            });
                             return
                         }
                 }
@@ -255,8 +271,13 @@
                 contentType: false,
                 success: function(response) {
                     if (response.code == '00') {
-                        $("#alert_text").text("修改成功");
-                        $("#alert").modal("show");
+                        Swal.fire({
+                            title: '修改成功!',
+                            icon: 'success',
+                            timer: 3000
+                        }).then((result) => {
+                            location.reload();
+                        });
                     };
                 },
                 error: function(xhr, status, error) {
@@ -265,8 +286,13 @@
                     if (xhr.status == '403') {
                         alert_text = "無此權限";
                     }
-                    $("#alert_text").text(alert_text);
-                    $("#alert").modal("show");
+
+                    Swal.fire({
+                        icon: "error",
+                        title: alert_text,
+                        timer: 3000
+                    });
+                    return
                 }
             });
         }

@@ -32,6 +32,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/backend/main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/backend/component.css') }}">
     <script src="{{ asset('js/accordion.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -42,34 +43,6 @@
         <!-- 下方內容容器 -->
         <div class="container-fluid p-3">
             @yield('container')
-        </div>
-    </div>
-
-    <div class="modal fade" id="alert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="alert-body">
-                    <div class="wd100 bg-light p-3 gx-1 rounded-3 dialog-box-content">
-                        <div class="row col-12 gx-0">
-                            <div class="w-auto col-1 gx-0">
-                                <div class="dive_sub" id="alert_text"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="dialogue" id="alertBtn">
-                    <button type="button" class="dialogue-btn shadow-sm btn btn-primary" data-bs-dismiss="modal"
-                        onclick="location.reload()">確認重整</button>
-                    <button type="button" class="dialogue-btn shadow-sm btn btn-primary"
-                        data-bs-dismiss="modal">關閉</button>
-                </div>
-            </div>
         </div>
     </div>
 </body>

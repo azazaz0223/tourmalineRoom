@@ -44,7 +44,7 @@
 <script>
     function updateSelfBtn() {
         const csrfToken = $('meta[name="csrf-token"]').attr('content');
-        const data = {            
+        const data = {
             name: "{{ auth('backend')->user()->name }}",
             email: "{{ auth('backend')->user()->email }}",
             password: $("input[name='selfPassword']").val(),
@@ -52,16 +52,26 @@
         };
 
         if (data.password == '') {
-            $("#alert_text").text("請輸入密碼!");
-            $("#alert").modal("show");
+            Swal.fire({
+                icon: "error",
+                title: "請輸入密碼!",
+                timer: 3000
+            });
             return
         } else if (data.password_confirmation == '') {
-            $("#alert_text").text("請再次輸入密碼!");
-            $("#alert").modal("show");
+            Swal.fire({
+                icon: "error",
+                title: "請再次輸入密碼!",
+                timer: 3000
+            });
             return
         } else if (data.password != data.password_confirmation) {
-            $("#alert_text").text("密碼不相符!");
-            $("#alert").modal("show");
+            Swal.fire({
+                icon: "error",
+                title: "密碼不相符!",
+                timer: 3000
+            });
+            return
         }
 
         $.ajax({
@@ -73,8 +83,13 @@
             data: data,
             success: function(response) {
                 if (response.code == '00') {
-                    $("#alert_text").text("修改成功");
-                    $("#alert").modal("show");
+                    Swal.fire({
+                        title: '修改成功！',
+                        icon: 'success',
+                        timer: 3000
+                    }).then((result) => {
+                        location.reload();
+                    });
                 };
             },
             error: function(xhr, status, error) {
@@ -83,8 +98,13 @@
                 if (xhr.status == '403') {
                     alert_text = "無此權限";
                 }
-                $("#alert_text").text(alert_text);
-                $("#alert").modal("show");
+
+                Swal.fire({
+                    icon: "error",
+                    title: alert_text,
+                    timer: 3000
+                });
+                return
             }
         });
     }

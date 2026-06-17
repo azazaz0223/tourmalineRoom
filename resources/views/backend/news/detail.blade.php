@@ -152,8 +152,11 @@
                 img.onload = function() {
                     if (flag) {
                         if (this.width !== 1200 || this.height !== 800) {
-                            $("#alert_text").text("圖片尺寸必須為 1200x800px");
-                            $("#alert").modal("show");
+                            Swal.fire({
+                                icon: "error",
+                                title: "圖片尺寸必須為 1200x800px",
+                                timer: 3000
+                            });
 
                             element.value = "";
                             return;
@@ -183,32 +186,47 @@
                 switch (pair[0]) {
                     case 'title':
                         if (pair[1] == '') {
-                            $("#alert_text").text('請輸入標題!');
-                            $("#alert").modal("show");
+                            Swal.fire({
+                                icon: "error",
+                                title: "請輸入文章標題!",
+                                timer: 3000
+                            });
                             return
                         }
                     case 'content':
                         if (pair[1] == '') {
-                            $("#alert_text").text('請輸入內容!');
-                            $("#alert").modal("show");
+                            Swal.fire({
+                                icon: "error",
+                                title: "請輸入內容!",
+                                timer: 3000
+                            });
                             return
                         }
                     case 'content_text':
                         if (pair[1] == '') {
-                            $("#alert_text").text('請輸入內文內容!');
-                            $("#alert").modal("show");
+                            Swal.fire({
+                                icon: "error",
+                                title: "請輸入內文內容!",
+                                timer: 3000
+                            });
                             return
                         }
                     case 'status':
                         if (pair[1] == "") {
-                            $("#alert_text").text('請選擇上下架!');
-                            $("#alert").modal("show");
+                            Swal.fire({
+                                icon: "error",
+                                title: "請選擇上下架!",
+                                timer: 3000
+                            });
                             return
                         }
                     case 'media_url':
                         if (pair[1].size == "0") {
-                            $("#alert_text").text('請輸入媒體網址!');
-                            $("#alert").modal("show");
+                            Swal.fire({
+                                icon: "error",
+                                title: "請輸入媒體網址!",
+                                timer: 3000
+                            });
                             return
                         }
                 }
@@ -225,8 +243,13 @@
                 contentType: false,
                 success: function(response) {
                     if (response.code == '00') {
-                        $("#alert_text").text("修改成功");
-                        $("#alert").modal("show");
+                        Swal.fire({
+                            title: '修改成功!',
+                            icon: 'success',
+                            timer: 3000
+                        }).then((result) => {
+                            location.reload();
+                        });
                     };
                 },
                 error: function(xhr, status, error) {
@@ -235,8 +258,13 @@
                     if (xhr.status == '403') {
                         alert_text = "無此權限";
                     }
-                    $("#alert_text").text(alert_text);
-                    $("#alert").modal("show");
+
+                    Swal.fire({
+                        icon: "error",
+                        title: alert_text,
+                        timer: 3000
+                    });
+                    return
                 }
             });
         }

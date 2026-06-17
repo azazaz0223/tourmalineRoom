@@ -40,6 +40,8 @@
 
     {{-- Responsive Stylesheet multipurpose --}}
     <link rel="stylesheet" href="{{ asset('css/frontend/responsive-multipurpose.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -535,13 +537,42 @@
                 data: data,
                 success: function(response) {
                     if (response.code == '00') {
-                        alert("成功!!");
-                        location.reload();
+                        Swal.fire({
+                            title: '成功！',
+                            icon: 'success',
+                            timer: 3000,
+                            didOpen: () => {
+                                const swalTitle = document.querySelector('.swal2-title');
+                                if (swalTitle) {
+                                    swalTitle.style.border = 'none';
+                                    swalTitle.style.borderBottom = 'none';
+                                    swalTitle.style.background = 'none';
+                                }
+
+                                // 清除 ::before 和 ::after 效果（如果是用 CSS Pseudo 寫的線）
+                                const style = document.createElement('style');
+                                style.textContent = `
+                                    .swal2-title::before,
+                                    .swal2-title::after {
+                                        display: none !important;
+                                        content: none !important;
+                                    }
+                                `;
+                                document.head.appendChild(style);
+                            }
+                        }).then((result) => {
+                            location.reload();
+                        });
                     };
                 },
                 error: function(xhr, status, error) {
                     let alert_text = "發生不可預期的錯誤";
-                    alert(alert_text);
+
+                    Swal.fire({
+                        icon: "error",
+                        title: alert_text,
+                        timer: 3000
+                    });
                 }
             });
         }
