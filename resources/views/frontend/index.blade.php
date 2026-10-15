@@ -272,7 +272,7 @@
                     <p class="text-light">若您有任何需求，歡迎與我們聯繫！</p>
                     <p class="text-light fw-bold mt-2"><strong>光之石｜璽室·汗蒸<br>The Tourmaline Room</strong></p>
                     <p><b><a href="tel:+886-2-2742-1002">電話：02-2742-1002</a></b></p>
-                    <p><b><a href="https://maps.app.goo.gl/MFRVBi5MwHPvPuhB8"
+                    <p><b><a href="https://maps.app.goo.gl/n7qJ4ftZfKgczmtD7"
                                 target="_blank">地址：臺北市松山區吉祥里八德路四段245巷56弄26號</a></b></p>
                     <p><b>營業時間：<br>
                             週一 11:00-21:00
