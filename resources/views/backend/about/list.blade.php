@@ -167,7 +167,7 @@
                             if (this.width !== 12000 || this.height !== 800) {
                                 Swal.fire({
                                     icon: "error",
-                                    title: "圖片尺寸必須為 1200x758x",
+                                    title: "圖片尺寸必須為 1200x80px",
                                     timer: 3000
                                 });
 
