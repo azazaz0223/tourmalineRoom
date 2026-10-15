@@ -74,7 +74,8 @@ class CarouselController extends Controller
                     }
 
                     if (isset($updateContentImages[$key]) && $updateContentImages[$key]->isValid()) {
-                        $this->uploadImageService->uploadImage($request['updateIds'][$key] . "content", 'carousel', $updateContentImages[$key]);
+                        $content_image_url = $this->uploadImageService->uploadImage($request['updateIds'][$key] . "content", 'carousel', $updateContentImages[$key]);
+                        $this->carouselService->update($request['updateIds'][$key], ["content_image" => $content_image_url]);
                     }
                 } catch (\Throwable $th) {
                     throw $th;
