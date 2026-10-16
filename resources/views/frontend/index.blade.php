@@ -429,13 +429,20 @@
             content = $("#news_content" + id).val();
             $("#content").html(replaceNewLine(content));
 
-            if (mediaType === 1) {
-                $("#title").append('<div id="instagram"></div>');
-                embedInstagramPost($("#news_media_url" + id).val(), 'instagram')
-            } else {
-                $("#title").append('<div id="youtube"></div>');
-                $("#youtube").addClass("video-wrapper w-100 mb-3 shadow");
-                embedVideo($("#news_media_url" + id).val(), 'youtube');
+            switch (mediaType) {
+                case 1:
+                    $("#title").append('<div id="instagram"></div>');
+                    embedInstagramPost($("#news_media_url" + id).val(), 'instagram')
+                    break;
+
+                case 2:
+                    $("#title").append('<div id="youtube"></div>');
+                    $("#youtube").addClass("video-wrapper w-100 mb-3 shadow");
+                    embedVideo($("#news_media_url" + id).val(), 'youtube');
+                    break;
+
+                default:
+                    break;
             }
 
             $("#modal").prop("checked", true);
