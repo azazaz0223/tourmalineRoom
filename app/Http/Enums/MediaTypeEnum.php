@@ -4,9 +4,12 @@ namespace App\Http\Enums;
 
 enum MediaTypeEnum: int
 {
-        // Instagram
+    // None
+    case NONE = 0;
+
+    // Instagram
     case INSTAGRAM = 1;
 
-        // Youtube
+    // Youtube
     case YOUTUBE = 2;
 }

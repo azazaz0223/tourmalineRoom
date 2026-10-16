@@ -276,15 +276,6 @@
                             });
                             return
                         }
-                    case 'media_url':
-                        if (pair[1].size == "0") {
-                            Swal.fire({
-                                icon: "error",
-                                title: "請輸入媒體網址!",
-                                timer: 3000
-                            });
-                            return
-                        }
                 }
             };
 
