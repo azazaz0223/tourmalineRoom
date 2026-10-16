@@ -23,7 +23,7 @@ class UpdateNewsRequest extends BaseRequest
             "content_image" => "nullable|image|mimes:jpeg,png,jpg",
             "status" => "required|in:0,1",
             "sort" => "nullable|integer|min:1",
-            "media_url" => "required|string",
+            "media_url" => "nullable|string",
             "mediaType" => ['required', new Enum(MediaTypeEnum::class)]
         ];
     }
