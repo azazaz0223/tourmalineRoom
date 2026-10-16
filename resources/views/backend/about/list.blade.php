@@ -164,7 +164,7 @@
                             break;
 
                         default:
-                            if (this.width !== 12000 || this.height !== 800) {
+                            if (this.width !== 1200 || this.height !== 800) {
                                 Swal.fire({
                                     icon: "error",
                                     title: "圖片尺寸必須為 1200x800px",
