@@ -9,6 +9,8 @@ use App\Models\News;
 use App\Services\Backend\NewsService;
 use App\Services\Backend\UploadImageService;
 
+use function PHPUnit\Framework\isNull;
+
 class NewsController extends Controller
 {
     public function __construct(
@@ -39,7 +41,8 @@ class NewsController extends Controller
      */
     public function store(CreateNewsRequest $request)
     {
-        if ($request['media_url'] == '') {
+        if (is_null($request['media_url'])) {
+            $request['media_url'] = "";
             $request['mediaType'] = 0;
         }
 
@@ -71,7 +74,8 @@ class NewsController extends Controller
      */
     public function update(UpdateNewsRequest $request, News $news)
     {
-        if ($request['media_url'] == '') {
+        if (is_null($request['media_url'])) {
+            $request['media_url'] = "";
             $request['mediaType'] = 0;
         }
 
