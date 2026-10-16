@@ -71,6 +71,10 @@ class NewsController extends Controller
      */
     public function update(UpdateNewsRequest $request, News $news)
     {
+        if ($request['media_url'] == '') {
+            $request['mediaType'] = 0;
+        }
+
         $data = [
             "title" => $request['title'],
             "content" => $request['content'],
