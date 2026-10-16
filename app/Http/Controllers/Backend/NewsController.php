@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Enums\MediaTypeEnum;
 use App\Http\Requests\Backend\CreateNewsRequest;
 use App\Http\Requests\Backend\UpdateNewsRequest;
 use App\Models\News;
@@ -43,7 +44,7 @@ class NewsController extends Controller
     {
         if (is_null($request['media_url'])) {
             $request['media_url'] = "";
-            $request['mediaType'] = 0;
+            $request['mediaType'] = MediaTypeEnum::NONE->value;
         }
 
         $data = [
@@ -76,7 +77,7 @@ class NewsController extends Controller
     {
         if (is_null($request['media_url'])) {
             $request['media_url'] = "";
-            $request['mediaType'] = 0;
+            $request['mediaType'] = MediaTypeEnum::NONE->value;
         }
 
         $data = [

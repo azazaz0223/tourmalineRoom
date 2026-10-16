@@ -103,13 +103,17 @@
                             <div class="dive_sub">顯示媒體類型</div>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="mediaType" id="radioBox1" value='1'
-                                checked>
-                            <label class="form-check-label" for="radioBox1">Instagram</label>
+                            <input class="form-check-input" type="radio" name="mediaType" id="radioBox1" value='0'>
+                            <label class="form-check-label" for="radioBox1">NONE</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="mediaType" id="radioBox2" value='2'>
-                            <label class="form-check-label" for="radioBox2">Youtube</label>
+                            <input class="form-check-input" type="radio" name="mediaType" id="radioBox2" value='1'
+                                checked>
+                            <label class="form-check-label" for="radioBox2">Instagram</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mediaType" id="radioBox3" value='2'>
+                            <label class="form-check-label" for="radioBox3">Youtube</label>
                         </div>
                     </div>
                     <div class="d-flex justify-content-start gap-3 mb-3">
