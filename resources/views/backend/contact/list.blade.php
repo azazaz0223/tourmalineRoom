@@ -71,12 +71,17 @@
 
                     <tbody>
                         @foreach ($list as $key => $contact)
-                            <tr onclick="showBtn({{ $contact->id }})" data-bs-toggle="modal" data-bs-target="#checkDetail">
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $contact->created_at }}</td>
-                                <td>{{ $contact->name }} </td>
-                                <td>{{ $contact->phone }}</td>
-                                <td>
+                            <tr>
+                                <td onclick="showBtn({{ $contact->id }})" data-bs-toggle="modal"
+                                    data-bs-target="#checkDetail">{{ $key + 1 }}</td>
+                                <td onclick="showBtn({{ $contact->id }})" data-bs-toggle="modal"
+                                    data-bs-target="#checkDetail">{{ $contact->created_at }}</td>
+                                <td onclick="showBtn({{ $contact->id }})" data-bs-toggle="modal"
+                                    data-bs-target="#checkDetail">{{ $contact->name }} </td>
+                                <td onclick="showBtn({{ $contact->id }})" data-bs-toggle="modal"
+                                    data-bs-target="#checkDetail">{{ $contact->phone }}</td>
+                                <td onclick="showBtn({{ $contact->id }})" data-bs-toggle="modal"
+                                    data-bs-target="#checkDetail">
                                     @if ($contact->isHandle == 0)
                                         <span
                                             class="badge rounded-pill bg-danger text-dark bg-opacity-25 fs-6 fw-normal">未回覆</span>
@@ -85,7 +90,9 @@
                                             class="badge rounded-pill bg-info text-dark bg-opacity-25 fs-6 fw-normal">已回覆</span>
                                     @endif
                                 </td>
-                                <td style="max-width: 250px; white-space: normal; word-break: break-all;">
+                                <td onclick="showBtn({{ $contact->id }})" data-bs-toggle="modal"
+                                    data-bs-target="#checkDetail"
+                                    style="max-width: 250px; white-space: normal; word-break: break-all;">
                                     {{ $contact->note }}</td>
                                 <td>
                                     <button type="button" onclick="deleteConfirmBtn({{ $contact->id }})"
