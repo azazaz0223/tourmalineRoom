@@ -33,4 +33,14 @@ class ContactController extends Controller
 
         return $this->successResponse(null, 200);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Contact $contact)
+    {
+        $this->contactService->delete($contact->id);
+
+        return $this->successResponse(null, 200);
+    }
 }

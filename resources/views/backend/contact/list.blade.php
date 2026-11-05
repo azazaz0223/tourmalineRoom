@@ -87,6 +87,10 @@
                                 </td>
                                 <td style="max-width: 250px; white-space: normal; word-break: break-all;">
                                     {{ $contact->note }}</td>
+                                <td>
+                                    <button type="button" onclick="deleteConfirmBtn({{ $contact->id }})"
+                                        class="btn btn-light rounded-3 shadow-sm"><i class="fas fa-times"></i></button>
+                                </td>
                                 <input type="hidden" id="content_{{ $contact->id }}" value="{{ $contact->content }}">
                                 <input type="hidden" id="isHandle_{{ $contact->id }}" value="{{ $contact->isHandle }}">
                                 <input type="hidden" id="note_{{ $contact->id }}" value="{{ $contact->note }}">
@@ -249,6 +253,57 @@
                         timer: 3000
                     });
                     return
+                }
+            });
+        }
+
+        function deleteConfirmBtn(id) {
+            const csrfToken = $('meta[name="csrf-token"]').attr('content');
+            Swal.fire({
+                title: '確認要刪除嗎？',
+                text: '刪除後無法撤銷！',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '是的，刪除！',
+                cancelButtonText: '取消',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    url = "{{ route('backend.contact.delete', ':id') }}";
+                    url = url.replace(':id', id);
+                    $.ajax({
+                        url: url,
+                        type: "DELETE",
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken
+                        },
+                        success: function(response) {
+                            if (response.code == '00') {
+                                Swal.fire({
+                                    title: '刪除成功！',
+                                    icon: 'success',
+                                    timer: 3000
+                                }).then((result) => {
+                                    location.reload();
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            let alert_text = "發生不可預期的錯誤";
+
+                            if (xhr.status == '403') {
+                                alert_text = "無此權限";
+                            }
+
+                            Swal.fire({
+                                icon: "error",
+                                title: alert_text,
+                                timer: 3000
+                            });
+                            return
+                        }
+                    });
                 }
             });
         }

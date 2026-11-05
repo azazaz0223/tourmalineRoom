@@ -71,5 +71,16 @@ class ContactRepository
             return false;
         }
     }
+
+    public function delete($id)
+    {
+        try {
+            Contact::destroy($id);
+
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
 }
 

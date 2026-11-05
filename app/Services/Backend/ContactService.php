@@ -26,4 +26,9 @@ class ContactService
     {
         return $this->contactRepository->update($contact, $request);
     }
+
+    public function delete($id)
+    {
+        return $this->contactRepository->delete($id);
+    }
 }

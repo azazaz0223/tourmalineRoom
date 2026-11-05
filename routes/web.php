@@ -89,6 +89,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'backend'], function () {
         Route::group(['namespace' => 'Contact', 'prefix' => 'contact'], function () {
             Route::get('', [ContactController::class, 'index'])->name('backend.contact.index');
             Route::patch('api/{contact}', [ContactController::class, 'update'])->name('backend.contact.update');
+            Route::delete('api/{contact}', [ContactController::class, 'destroy'])->name('backend.contact.delete');
         });
     });
 });
