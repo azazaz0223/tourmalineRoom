@@ -285,7 +285,7 @@
                     <div class="input-group">
                         <div class="form-check form-check-inline me-4">
                             <input type="radio" class="form-check-input content-type-radio"
-                                name="contentTypes[${image_id}]"
+                                name="contentTypes[]"
                                 id="contentType0_${image_id}" value="0" checked>
 
                             <label class="form-check-label" for="contentType0_${image_id}">自訂內文
@@ -293,7 +293,7 @@
                         </div>
                         <div class="form-check form-check-inline me-4">
                             <input type="radio" class="form-check-input content-type-radio"
-                                name="contentTypes[${image_id}]"
+                                name="contentTypes[]"
                                 id="contentType1_${image_id}" value="1">
 
                             <label class="form-check-label" for="contentType1_${image_id}"> URL
