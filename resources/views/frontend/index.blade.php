@@ -96,7 +96,7 @@
                                             value="{{ $carousel->content }}">
                                         <input type="hidden" id="carousel_contentType{{ $carousel->id }}"
                                             value="{{ $carousel->content_type }}">
-                                        <input type="hidden" id="carousel_content{{ $carousel->id }}"
+                                        <input type="hidden" id="carousel_contentText{{ $carousel->id }}"
                                             value="{{ $carousel->content_text }}">
                                         <input type="hidden" id="carousel_image{{ $carousel->id }}"
                                             value="{{ asset($carousel->content_image) }}">
@@ -414,7 +414,7 @@
             if (type == 0) {
                 $("#title").text($("#carousel_content" + id).val());
                 $("#image").prop("src", $("#carousel_image" + id).val());
-                content = $("#carousel_content" + id).val();
+                content = $("#carousel_contentText" + id).val();
                 $("#content").html(replaceNewLine(content));
 
                 $("#modal").prop("checked", true);

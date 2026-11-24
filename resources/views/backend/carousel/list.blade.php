@@ -118,7 +118,7 @@
                                     class="content-type-section    {{ ($carousel->content_type ?? 0) == 0 ? '' : 'd-none' }}">
 
                                     <div class="w-auto col-1">
-                                        <div class="dive_sub">內容</div>
+                                        <div class="dive_sub">內容標題</div>
                                     </div>
                                     <div class="input-group">
                                         <textarea name="updateContents[]" class="form-control border bg-white" rows="2">{{ $carousel->content }}</textarea>
@@ -305,7 +305,7 @@
 
                     <div class="content-type-section">
                         <div class="w-auto col-1">
-                            <div class="dive_sub">內容</div>
+                            <div class="dive_sub">內容標題</div>
                         </div>
                         <div class="input-group">
                             <textarea name="contents[]" class="form-control border bg-white" rows="2"></textarea>
