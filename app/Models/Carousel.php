@@ -11,10 +11,13 @@ class Carousel extends Model
 
     protected $fillable = [
         'title',
+        'button_text',
+        'content_type',
         'subtitle',
         'content',
         'image',
         'content_text',
         'content_image',
+        'url',
     ];
 }

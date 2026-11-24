@@ -91,13 +91,17 @@
                                         <h2 class="animation animated-item-1">{{ $carousel->title }}</h2>
                                         <p class="animation animated-item-2">{{ $carousel->subtitle }}</p>
                                         <label class="btn btn-md animation animated-item-3"
-                                            onclick="carouselBtn({{ $carousel->id }})">立即預約</label>
+                                            onclick="carouselBtn({{ $carousel->id }})">{{ $carousel->button_text }}</label>
                                         <input type="hidden" id="carousel_title{{ $carousel->id }}"
                                             value="{{ $carousel->title }}">
+                                        <input type="hidden" id="carousel_contentType{{ $carousel->id }}"
+                                            value="{{ $carousel->content_type }}">
                                         <input type="hidden" id="carousel_content{{ $carousel->id }}"
                                             value="{{ $carousel->content_text }}">
                                         <input type="hidden" id="carousel_image{{ $carousel->id }}"
                                             value="{{ asset($carousel->content_image) }}">
+                                        <input type="hidden" id="carousel_url{{ $carousel->id }}"
+                                            value="{{ $carousel->url }}">
                                     </div>
                                 </div>
                             </div>
@@ -406,12 +410,17 @@
         }
 
         function carouselBtn(id) {
-            $("#title").text($("#carousel_title" + id).val());
-            $("#image").prop("src", $("#carousel_image" + id).val());
-            content = $("#carousel_content" + id).val();
-            $("#content").html(replaceNewLine(content));
+            let type = $("#carousel_contentType" + id).val();
+            if (type == 0) {
+                $("#title").text($("#carousel_title" + id).val());
+                $("#image").prop("src", $("#carousel_image" + id).val());
+                content = $("#carousel_content" + id).val();
+                $("#content").html(replaceNewLine(content));
 
-            $("#modal").prop("checked", true);
+                $("#modal").prop("checked", true);
+            } else if (type == 1) {
+                window.open($("#carousel_url" + id).val(), '_blank');
+            }
         }
 
         function aboutBtn(id) {

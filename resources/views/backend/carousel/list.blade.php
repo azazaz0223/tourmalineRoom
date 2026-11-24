@@ -84,16 +84,62 @@
                                         value="{{ $carousel->subtitle }}">
                                 </div>
                                 <div class="w-auto col-1">
-                                    <div class="dive_sub">內容</div>
+                                    <div class="dive_sub">按鈕文字</div>
                                 </div>
                                 <div class="input-group">
-                                    <textarea name="updateContents[]" class="form-control border bg-white" rows="2">{{ $carousel->content }}</textarea>
+                                    <input type="text" class="form-control border bg-white" name="updateButtonTexts[]"
+                                        value="{{ $carousel->button_text }}">
                                 </div>
                                 <div class="w-auto col-1">
-                                    <div class="dive_sub">內容文字</div>
+                                    <div class="dive_sub">內文類別</div>
                                 </div>
                                 <div class="input-group">
-                                    <textarea name="updateContentTexts[]" class="form-control border bg-white" rows="2">{{ $carousel->content_text }}</textarea>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input content-type-radio"
+                                            name="updateContentTypes[]" id="updateContentType0_{{ $carousel->id }}"
+                                            value="0" {{ ($carousel->content_type ?? 0) == 0 ? 'checked' : '' }}>
+
+                                        <label class="form-check-label" for="updateContentType0_{{ $carousel->id }}">自訂內文
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input content-type-radio"
+                                            name="updateContentTypes[]" id="updateContentType1_{{ $carousel->id }}"
+                                            value="1" {{ ($carousel->content_type ?? 0) == 1 ? 'checked' : '' }}>
+
+                                        <label class="form-check-label" for="updateContentType1_{{ $carousel->id }}"> URL
+                                            跳轉 </label>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="content-type-section    {{ ($carousel->content_type ?? 0) == 0 ? '' : 'd-none' }}">
+
+                                    <div class="w-auto col-1">
+                                        <div class="dive_sub">內容</div>
+                                    </div>
+                                    <div class="input-group">
+                                        <textarea name="updateContents[]" class="form-control border bg-white" rows="2">{{ $carousel->content }}</textarea>
+                                    </div>
+
+                                    <div class="w-auto col-1">
+                                        <div class="dive_sub">內容文字</div>
+                                    </div>
+                                    <div class="input-group">
+                                        <textarea name="updateContentTexts[]" class="form-control border bg-white" rows="2">{{ $carousel->content_text }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="url-type-section    {{ ($carousel->content_type ?? 0) == 1 ? '' : 'd-none' }}">
+
+                                    <div class="w-auto col-1">
+                                        <div class="dive_sub">URL</div>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="url" class="form-control border bg-white" name="updateUrls[]"
+                                            value="{{ $carousel->url }}" placeholder="https://example.com">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -109,6 +155,17 @@
     </div>
 
     <script>
+        $(document).on('change', '.content-type-radio', function() {
+            const type = $(this).val();
+            const parent = $(this).closest('.col-8');
+
+            parent.find('.content-type-section')
+                .toggleClass('d-none', type !== '0');
+
+            parent.find('.url-type-section')
+                .toggleClass('d-none', type !== '1');
+        });
+
         image_id = {{ count($list) + 1 }};
 
         function updateLogoBtn() {
@@ -187,15 +244,15 @@
             <div class="card-body border-bottom d-flex justify-content-between gap-3">
                 <div class="col-4 card-body fs-6 gray_l rounded-3">
                     <label class="mb-2">上傳封面圖片<span style="color: red">(只接受jpg、png,尺寸建議1920*750)</span></label>
-                    <input type="file" name="images[]" id="carousel` + image_id + `" onchange="reviewImage(this)"
+                    <input type="file" name="images[]" id="carousel${image_id}" onchange="reviewImage(this)"
                         class="form-control search_input product-hover easein">
-                    <img id="carousel` + image_id + `Img" class="mt-3"
+                    <img id="carousel${image_id}Img" class="mt-3"
                         src="{{ asset('images/backend/defaultImage.png') }}">
 
                     <label class="mb-2">上傳內容圖片<span style="color: red">(只接受jpg、png,尺寸建議1920*750)</span></label>
-                    <input type="file" name="contentImages[]" id="carouselContent` + image_id + `"
+                    <input type="file" name="contentImages[]" id="carouselContent${image_id}"
                         onchange="reviewImage(this)" class="form-control search_input product-hover easein">
-                    <img id="carouselContent` + image_id + `Img" class="mt-3"
+                    <img id="carouselContent${image_id}Img" class="mt-3"
                         src="{{ asset('images/backend/defaultImage.png') }}">
                 </div>
 
@@ -215,17 +272,58 @@
                         <input type="text" class="form-control border bg-white" name="subtitles[]" value="">
                     </div>
                     <div class="w-auto col-1">
-                        <div class="dive_sub">內容</div>
+                        <div class="dive_sub">按鈕文字</div>
                     </div>
                     <div class="input-group">
-                        <textarea name="contents[]" class="form-control border bg-white" rows="2"></textarea>
+                        <input type="text" class="form-control border bg-white" name="updateButtonTexts[]"
+                            value="">
                     </div>
+
                     <div class="w-auto col-1">
-                        <div class="dive_sub">內容文字</div>
+                        <div class="dive_sub">內文類別</div>
                     </div>
                     <div class="input-group">
-                        <textarea name="contentTexts[]" class="form-control border bg-white"
-                            rows="2"></textarea>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input content-type-radio"
+                                name="contentTypes[${image_id}]"
+                                id="contentType0_${image_id}" value="0" checked>
+
+                            <label class="form-check-label" for="contentType0_${image_id}">自訂內文
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input content-type-radio"
+                                name="contentTypes[${image_id}]"
+                                id="contentType1_${image_id}" value="1">
+
+                            <label class="form-check-label" for="contentType1_${image_id}"> URL
+                                跳轉 </label>
+                        </div>
+                    </div>
+
+                    <div class="content-type-section">
+                        <div class="w-auto col-1">
+                            <div class="dive_sub">內容</div>
+                        </div>
+                        <div class="input-group">
+                            <textarea name="contents[]" class="form-control border bg-white" rows="2"></textarea>
+                        </div>
+
+                        <div class="w-auto col-1">
+                            <div class="dive_sub">內容文字</div>
+                        </div>
+                        <div class="input-group">
+                            <textarea name="contentTexts[]" class="form-control border bg-white" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="url-type-section d-none>
+                        <div class="w-auto col-1">
+                            <div class="dive_sub">URL</div>
+                        </div>
+                        <div class="input-group">
+                            <input type="url" class="form-control border bg-white" name="urls[]" placeholder="https://example.com">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -245,6 +343,7 @@
         function updateBtn() {
             const csrfToken = $('meta[name="csrf-token"]').attr('content');
             let data = new FormData($('#updateCarousel')[0]);
+            let isValid = true;
 
             for (var pair of data.entries()) {
                 switch (pair[0]) {
@@ -259,6 +358,31 @@
                         }
                 }
             };
+
+            $('#updateCarousel .content-type-radio:checked').each(function() {
+                if ($(this).val() !== '1') {
+                    return;
+                }
+
+                const parent = $(this).closest('.col-8');
+                const input = parent.find('.url-type-section input')[0];
+                const url = input.value.trim();
+
+                if (!url || !input.checkValidity() || !/^https?:\/\//i.test(url)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '請輸入正確的 URL！',
+                        timer: 3000
+                    });
+
+                    isValid = false;
+                    return false;
+                }
+            });
+
+            if (!isValid) {
+                return;
+            }
 
             $.ajax({
                 url: "{{ route('backend.carousel.upsert') }}",

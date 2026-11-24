@@ -63,8 +63,11 @@ class CarouselController extends Controller
                     $data = [
                         "title" => $request['updateTitles'][$key],
                         "subtitle" => $request['updateSubtitles'][$key],
-                        "content" => $request['updateContents'][$key],
-                        "content_text" => $request['updateContentTexts'][$key]
+                        "button_text" => $request['updateButtonTexts'][$key],
+                        "content_type" => $request['updateContentTypes'][$key],
+                        "content" => $request['updateContentTypes'][$key] == 0 ? $request['updateContents'][$key] : null,
+                        "content_text" => $request['updateContentTypes'][$key] == 0 ? $request['updateContentTexts'][$key] : null,
+                        "url" => $request['updateContentTypes'][$key] == 1 ? $request['updateUrls'][$key] : null
                     ];
 
                     $this->carouselService->update($request['updateIds'][$key], $data);
@@ -89,8 +92,11 @@ class CarouselController extends Controller
                     $data = [
                         "title" => $request['titles'][$key],
                         "subtitle" => $request['subtitles'][$key],
-                        "content" => $request['contents'][$key],
-                        "content_text" => $request['contentTexts'][$key]
+                        "button_text" => $request['buttonTexts'][$key],
+                        "content_type" => $request['contentTypes'][$key],
+                        "content" => $request['contentTypes'][$key] == 0 ? $request['contents'][$key] : null,
+                        "content_text" => $request['contentTypes'][$key] == 0 ? $request['contentTexts'][$key] : null,
+                        "url" => $request['contentTypes'][$key] == 1 ? $request['urls'][$key] : null
                     ];
 
                     $carousel = $this->carouselService->create($data);
