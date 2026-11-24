@@ -92,8 +92,8 @@
                                         <p class="animation animated-item-2">{{ $carousel->subtitle }}</p>
                                         <label class="btn btn-md animation animated-item-3"
                                             onclick="carouselBtn({{ $carousel->id }})">{{ $carousel->button_text }}</label>
-                                        <input type="hidden" id="carousel_title{{ $carousel->id }}"
-                                            value="{{ $carousel->title }}">
+                                        <input type="hidden" id="carousel_content{{ $carousel->id }}"
+                                            value="{{ $carousel->content }}">
                                         <input type="hidden" id="carousel_contentType{{ $carousel->id }}"
                                             value="{{ $carousel->content_type }}">
                                         <input type="hidden" id="carousel_content{{ $carousel->id }}"
@@ -412,7 +412,7 @@
         function carouselBtn(id) {
             let type = $("#carousel_contentType" + id).val();
             if (type == 0) {
-                $("#title").text($("#carousel_title" + id).val());
+                $("#title").text($("#carousel_content" + id).val());
                 $("#image").prop("src", $("#carousel_image" + id).val());
                 content = $("#carousel_content" + id).val();
                 $("#content").html(replaceNewLine(content));
