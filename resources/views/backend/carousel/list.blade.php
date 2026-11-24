@@ -94,7 +94,7 @@
                                     <div class="dive_sub">內文類別</div>
                                 </div>
                                 <div class="input-group">
-                                    <div class="form-check">
+                                    <div class="form-check form-check-inline me-4">
                                         <input type="radio" class="form-check-input content-type-radio"
                                             name="updateContentTypes[]" id="updateContentType0_{{ $carousel->id }}"
                                             value="0" {{ ($carousel->content_type ?? 0) == 0 ? 'checked' : '' }}>
@@ -102,7 +102,7 @@
                                         <label class="form-check-label" for="updateContentType0_{{ $carousel->id }}">自訂內文
                                         </label>
                                     </div>
-                                    <div class="form-check">
+                                    <div class="form-check form-check-inline me-4">
                                         <input type="radio" class="form-check-input content-type-radio"
                                             name="updateContentTypes[]" id="updateContentType1_{{ $carousel->id }}"
                                             value="1" {{ ($carousel->content_type ?? 0) == 1 ? 'checked' : '' }}>
@@ -283,7 +283,7 @@
                         <div class="dive_sub">內文類別</div>
                     </div>
                     <div class="input-group">
-                        <div class="form-check">
+                        <div class="form-check form-check-inline me-4">
                             <input type="radio" class="form-check-input content-type-radio"
                                 name="contentTypes[${image_id}]"
                                 id="contentType0_${image_id}" value="0" checked>
@@ -291,7 +291,7 @@
                             <label class="form-check-label" for="contentType0_${image_id}">自訂內文
                             </label>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check form-check-inline me-4">
                             <input type="radio" class="form-check-input content-type-radio"
                                 name="contentTypes[${image_id}]"
                                 id="contentType1_${image_id}" value="1">
