@@ -104,7 +104,7 @@ class CarouselController extends Controller
                     $image_url = $this->uploadImageService->uploadImage($carousel->id, 'carousel', $request['images'][$key]);
                     $this->carouselService->updateImageUrl($carousel->id, $image_url);
 
-                    if (isset($updateContentImages[$key]) && $updateContentImages[$key]->isValid()) {
+                    if (isset($request['contentImages'][$key]) && $request['contentImages'][$key]->isValid()) {
                         $content_image_url = $this->uploadImageService->uploadImage($carousel->id . "content", 'carousel', $request['contentImages'][$key]);
                         $this->carouselService->update($carousel->id, ["content_image" => $content_image_url]);
                     }

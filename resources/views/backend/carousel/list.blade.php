@@ -45,7 +45,7 @@
 
             <form id="updateCarousel">
                 <div id="upload_div">
-                    @foreach ($list as $carousel)
+                    @foreach ($list as $key => $carousel)
                         <div class="card-body border-bottom d-flex justify-content-between gap-3">
                             <input type="hidden" name="updateIds[]" value="{{ $carousel->id }}">
 
@@ -96,16 +96,18 @@
                                 <div class="input-group">
                                     <div class="form-check form-check-inline me-4">
                                         <input type="radio" class="form-check-input content-type-radio"
-                                            name="updateContentTypes[]" id="updateContentType0_{{ $carousel->id }}"
-                                            value="0" {{ ($carousel->content_type ?? 0) == 0 ? 'checked' : '' }}>
+                                            name="updateContentTypes[{{ $key }}]"
+                                            id="updateContentType0_{{ $carousel->id }}" value="0"
+                                            {{ ($carousel->content_type ?? 0) == 0 ? 'checked' : '' }}>
 
                                         <label class="form-check-label" for="updateContentType0_{{ $carousel->id }}">自訂內文
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline me-4">
                                         <input type="radio" class="form-check-input content-type-radio"
-                                            name="updateContentTypes[]" id="updateContentType1_{{ $carousel->id }}"
-                                            value="1" {{ ($carousel->content_type ?? 0) == 1 ? 'checked' : '' }}>
+                                            name="updateContentTypes[{{ $key }}]"
+                                            id="updateContentType1_{{ $carousel->id }}" value="1"
+                                            {{ ($carousel->content_type ?? 0) == 1 ? 'checked' : '' }}>
 
                                         <label class="form-check-label" for="updateContentType1_{{ $carousel->id }}"> URL
                                             跳轉 </label>
@@ -275,7 +277,7 @@
                         <div class="dive_sub">按鈕文字</div>
                     </div>
                     <div class="input-group">
-                        <input type="text" class="form-control border bg-white" name="updateButtonTexts[]"
+                        <input type="text" class="form-control border bg-white" name="buttonTexts[]"
                             value="">
                     </div>
 
@@ -317,7 +319,7 @@
                         </div>
                     </div>
 
-                    <div class="url-type-section d-none>
+                    <div class="url-type-section d-none">
                         <div class="w-auto col-1">
                             <div class="dive_sub">URL</div>
                         </div>
